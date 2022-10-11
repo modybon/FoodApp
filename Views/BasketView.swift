@@ -8,8 +8,32 @@
 import SwiftUI
 
 struct BasketView: View {
+    let grayColor : Color = Color(red: 0.917, green: 0.908, blue: 0.911, opacity: 1)
     var body: some View {
-        Text("Basket")
+        NavigationView{
+            ScrollView{
+                VStack(alignment:.leading,spacing: 20){
+                    Text("Past orders").font(.system(size: 20)).fontWeight(.medium)
+                    VStack{
+                        PastOrderView()
+                        PastOrderView()
+                        PastOrderView()
+                        PastOrderView()
+                        PastOrderView()
+                        PastOrderView()
+                        PastOrderView()
+                        PastOrderView()
+                        PastOrderView()
+                    }
+                }
+            }.navigationBarTitleDisplayMode(.automatic).toolbar{
+                ToolbarItem(placement: .principal) {
+                    HStack {
+                        Text("Your orders").font(.headline)
+                    }
+                }
+            }
+        }
     }
 }
 
