@@ -13,21 +13,16 @@ struct BasketView: View {
     var body: some View {
         NavigationView{
             List{
+                Text("Carts").font(.system(size: 40)).fontWeight(.bold).listRowSeparator(.hidden)
                 ForEach(arr,id: \.self){ item in
                     NavigationLink(destination: CartOrderView()){
                         CartOrderView()
                             .onTapGesture {
-                            print("Item Tapped")
-                        }
+                                print("Item Tapped")
+                            }
                     }
                 }.onDelete{_ in
                     print("Item Deleted")
-                }
-            }.navigationBarTitleDisplayMode(.inline).toolbar{
-                ToolbarItem(placement:.navigationBarLeading){
-                    HStack{
-                        Text("Carts").font(.system(size: 50)).fontWeight(.bold)
-                    }
                 }
             }
         }
