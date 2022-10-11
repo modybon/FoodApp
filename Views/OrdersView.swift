@@ -9,7 +9,30 @@ import SwiftUI
 
 struct OrdersView: View {
     var body: some View {
-        Text("Orders")
+        NavigationView{
+            ScrollView{
+                VStack(alignment:.leading,spacing: 20){
+                    Text("Past orders").font(.system(size: 20)).fontWeight(.medium)
+                    VStack{
+                        PastOrderView()
+                        PastOrderView()
+                        PastOrderView()
+                        PastOrderView()
+                        PastOrderView()
+                        PastOrderView()
+                        PastOrderView()
+                        PastOrderView()
+                        PastOrderView()
+                    }
+                }
+            }.navigationBarTitleDisplayMode(.automatic).toolbar{
+                ToolbarItem(placement: .principal) {
+                    HStack {
+                        Text("Your orders").font(.headline)
+                    }
+                }
+            }
+        }
     }
 }
 

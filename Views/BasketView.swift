@@ -9,31 +9,29 @@ import SwiftUI
 
 struct BasketView: View {
     let grayColor : Color = Color(red: 0.917, green: 0.908, blue: 0.911, opacity: 1)
+    let arr = [1,2,3,4,5]
     var body: some View {
         NavigationView{
-            ScrollView{
-                VStack(alignment:.leading,spacing: 20){
-                    Text("Past orders").font(.system(size: 20)).fontWeight(.medium)
-                    VStack{
-                        PastOrderView()
-                        PastOrderView()
-                        PastOrderView()
-                        PastOrderView()
-                        PastOrderView()
-                        PastOrderView()
-                        PastOrderView()
-                        PastOrderView()
-                        PastOrderView()
+            List{
+                ForEach(arr,id: \.self){ item in
+                    NavigationLink(destination: CartOrderView()){
+                        CartOrderView()
+                            .onTapGesture {
+                            print("Item Tapped")
+                        }
                     }
+                }.onDelete{_ in
+                    print("Item Deleted")
                 }
-            }.navigationBarTitleDisplayMode(.automatic).toolbar{
-                ToolbarItem(placement: .principal) {
-                    HStack {
-                        Text("Your orders").font(.headline)
+            }.navigationBarTitleDisplayMode(.inline).toolbar{
+                ToolbarItem(placement:.navigationBarLeading){
+                    HStack{
+                        Text("Carts").font(.system(size: 50)).fontWeight(.bold)
                     }
                 }
             }
         }
+        
     }
 }
 
