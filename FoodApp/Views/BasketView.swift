@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct BasketView: View {
     let grayColor : Color = Color(red: 0.917, green: 0.908, blue: 0.911, opacity: 1)
     let arr = [1,2,3,4,5]

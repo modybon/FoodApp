@@ -20,6 +20,7 @@
 		2D0402C428F5150200F2835F /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0402C328F5150200F2835F /* OrdersView.swift */; };
 		2D0402C828F518BA00F2835F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D0402C728F518BA00F2835F /* GoogleService-Info.plist */; };
 		2D0402CE28F51C5700F2835F /* PastOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0402CD28F51C5700F2835F /* PastOrderView.swift */; };
+		2D667DBB28F905590022392D /* ResturantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D667DBA28F905590022392D /* ResturantView.swift */; };
 		2DE39B8828F5DE3600F60A4B /* CartOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE39B8728F5DE3600F60A4B /* CartOrderView.swift */; };
 		8B39466CDD414D4685B1CBB3 /* Pods_FoodApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64BC214EB1E97BD21E07EE8 /* Pods_FoodApp.framework */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		2D0402C328F5150200F2835F /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
 		2D0402C728F518BA00F2835F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D0402CD28F51C5700F2835F /* PastOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastOrderView.swift; sourceTree = "<group>"; };
+		2D667DBA28F905590022392D /* ResturantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturantView.swift; sourceTree = "<group>"; };
 		2DE39B8728F5DE3600F60A4B /* CartOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartOrderView.swift; sourceTree = "<group>"; };
 		B8A334D7EB50598E77A99AC0 /* Pods-FoodApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodApp.release.xcconfig"; path = "Target Support Files/Pods-FoodApp/Pods-FoodApp.release.xcconfig"; sourceTree = "<group>"; };
 		C64BC214EB1E97BD21E07EE8 /* Pods_FoodApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +126,7 @@
 				2D0402C328F5150200F2835F /* OrdersView.swift */,
 				2D0402CD28F51C5700F2835F /* PastOrderView.swift */,
 				2DE39B8728F5DE3600F60A4B /* CartOrderView.swift */,
+				2D667DBA28F905590022392D /* ResturantView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D0402C228F514F100F2835F /* BrowseView.swift in Sources */,
+				2D667DBB28F905590022392D /* ResturantView.swift in Sources */,
 				2D0402BE28F514BA00F2835F /* AccountView.swift in Sources */,
 				2D0402AE28F50E1100F2835F /* Persistence.swift in Sources */,
 				2D0402B128F50E1100F2835F /* FoodApp.xcdatamodeld in Sources */,
