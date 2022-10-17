@@ -22,6 +22,7 @@
 		2D0402CE28F51C5700F2835F /* PastOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0402CD28F51C5700F2835F /* PastOrderView.swift */; };
 		2D667DBB28F905590022392D /* ResturantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D667DBA28F905590022392D /* ResturantView.swift */; };
 		2DE39B8828F5DE3600F60A4B /* CartOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE39B8728F5DE3600F60A4B /* CartOrderView.swift */; };
+		2DF0374428FD03790042D80A /* OrderMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF0374328FD03790042D80A /* OrderMethod.swift */; };
 		8B39466CDD414D4685B1CBB3 /* Pods_FoodApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64BC214EB1E97BD21E07EE8 /* Pods_FoodApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		2D0402CD28F51C5700F2835F /* PastOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastOrderView.swift; sourceTree = "<group>"; };
 		2D667DBA28F905590022392D /* ResturantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturantView.swift; sourceTree = "<group>"; };
 		2DE39B8728F5DE3600F60A4B /* CartOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartOrderView.swift; sourceTree = "<group>"; };
+		2DF0374328FD03790042D80A /* OrderMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderMethod.swift; sourceTree = "<group>"; };
 		B8A334D7EB50598E77A99AC0 /* Pods-FoodApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodApp.release.xcconfig"; path = "Target Support Files/Pods-FoodApp/Pods-FoodApp.release.xcconfig"; sourceTree = "<group>"; };
 		C64BC214EB1E97BD21E07EE8 /* Pods_FoodApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -104,6 +106,7 @@
 		2D0402B728F5144200F2835F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2DF0374328FD03790042D80A /* OrderMethod.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				2D0402CE28F51C5700F2835F /* PastOrderView.swift in Sources */,
 				2DE39B8828F5DE3600F60A4B /* CartOrderView.swift in Sources */,
 				2D0402BB28F5149600F2835F /* HomeView.swift in Sources */,
+				2DF0374428FD03790042D80A /* OrderMethod.swift in Sources */,
 				2D0402C028F514DA00F2835F /* BasketView.swift in Sources */,
 				2D0402A528F50E0E00F2835F /* FoodAppApp.swift in Sources */,
 				2D0402C428F5150200F2835F /* OrdersView.swift in Sources */,
