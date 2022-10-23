@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CartOrderView: View {
     var body: some View {
-        ///
         HStack{
             Image(systemName: "beats.fit.pro.chargingcase.fill").font(.system(size: 50))
             VStack(alignment:.leading){
