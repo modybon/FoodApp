@@ -8,15 +8,23 @@
 import SwiftUI
 
 struct ResturantView: View {
+    @State var isFavourite : Bool = false
     var body: some View {
+        let heartImage : String = (self.isFavourite) ?  "heart.fill" : "heart"
         VStack(alignment:.leading){
-            ZStack{
+            
+            ZStack(alignment:.topTrailing){
                 Image(systemName: "person.fill")
                     .frame(maxWidth:.infinity,minHeight: 150)
                     .font(.system(size: 180))
+                Image(systemName: heartImage).font(.system(size: 40))
+                    .foregroundColor((self.isFavourite) ? .red: nil)
+                    .onTapGesture {
+                    print("Tapped")
+                    self.isFavourite.toggle()
+                }
                 // TODO: HEART SHAPE BUTTON TO FOR FAVOURITE RESTURANTS
             }
-            
             HStack{
                 VStack(alignment:.leading){
                     Text("Macdonald's")

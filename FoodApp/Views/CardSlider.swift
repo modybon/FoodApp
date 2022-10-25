@@ -7,49 +7,52 @@
 
 import SwiftUI
 
-struct CardSlider: View {
+struct CardSlider: ViewModifier {
     @State private var dragging = false
     @GestureState private var dragTracker: CGSize = CGSize.zero
-    @State private var position: CGFloat = UIScreen.main.bounds.height - 100
-    var body: some View {
+    @State private var position: CGFloat = UIScreen.main.bounds.height - 380
+    
+    func body(content: Content) -> some View {
         ZStack(alignment: .top) {
             ZStack(alignment: .top) {
                 RoundedRectangle(cornerRadius: 2.5)
                     .frame(width: 40, height: 5.0)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color.secondary)
                     .padding(10)
+                content.padding(.top, 30)
             }
             .frame(minWidth: UIScreen.main.bounds.width)
             .scaleEffect(x: 1, y: 1, anchor: .center)
             .background(Color.white)
             .cornerRadius(15)
-            ResturantView()
         }
-        .offset(y: max(0, position + self.dragTracker.height))
-        .gesture(DragGesture().updating($dragTracker){drag , state, transaction  in
-            state = drag.translation
-        }.onChanged{ _ in
-            dragging = true
-        }.onEnded(onDragEnded(drag:))
-        )
+        .offset(y:  max(0, position + self.dragTracker.height))
+        .animation(Animation.interpolatingSpring(stiffness: 250.0, damping: 40.0, initialVelocity: 5.0), value: dragging)
+        .gesture(DragGesture()
+            .updating($dragTracker) { drag, state, transaction in state = drag.translation }
+            .onChanged {_ in  dragging = true }
+            .onEnded(onDragEnded))
     }
-    private func onDragEnded(drag: DragGesture.Value){
+    private func onDragEnded(drag: DragGesture.Value) {
         dragging = false
         let high = UIScreen.main.bounds.height - 100
         let low: CGFloat = 100
         let dragDirection = drag.predictedEndLocation.y - drag.location.y
-        
-        if (dragDirection > 0){
+        //can also calculate drag offset to make it more rigid to shrink and expand
+        if dragDirection > 0 {
             position = high
-        }else{
+        } else {
             position = low
         }
-        
     }
 }
 
-struct CardSlider_Previews: PreviewProvider {
-    static var previews: some View {
-        CardSlider()
-    }
-}
+//struct CardSlider_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CardSlider()
+//    }
+//}
+
+//        .animation(dragging ? nil : {
+//            Animation.interpolatingSpring(stiffness: 250.0, damping: 40.0, initialVelocity: 5.0)
+//        }())
