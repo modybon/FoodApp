@@ -16,20 +16,6 @@ struct HomeView: View {
     var body: some View {
         VStack{
             HStack{
-                Rectangle()
-                .cornerRadius(15)
-                .foregroundColor(.yellow)
-                .frame(width: 50, height: 50, alignment: .center)
-                .overlay(
-                    Image(systemName: "person.fill").font(.system(size: 45))
-                )
-                VStack(alignment:.leading){
-                    Text("Deliver to").foregroundColor(.orange)
-                    Text("Last Name, First Name").underline()
-                }
-            }.frame(maxWidth:.infinity,alignment:.leading).padding(.leading)
-            
-            HStack{
                 Rectangle().foregroundColor((self.orderMethod == .Delivery) ? Color.black : Color.white)
                     .cornerRadius(25).frame(width: 95, height: 35)
                     .overlay(
@@ -40,7 +26,7 @@ struct HomeView: View {
                         }){
                             Text("Delivery").foregroundColor((self.orderMethod == .Pickup) ? Color.black : Color.white).frame(maxWidth:.infinity,maxHeight: .infinity)
                         }.disabled(self.deleveryBtnIsDisabled)
-                    )
+                    )// End of Rectangle
 
                 Rectangle().foregroundColor((self.orderMethod == .Pickup) ? Color.black : Color.white)
                     .cornerRadius(25).frame(width: 95, height: 35)
@@ -52,20 +38,26 @@ struct HomeView: View {
                         }){
                             Text("Pickup").foregroundColor((self.orderMethod == .Delivery) ? Color.black : Color.white).frame(maxWidth:.infinity,maxHeight: .infinity)
                         }.disabled(self.pickupBtnIsDisabled)
-                    )
-            }
+                    )// End of Rectangle
+            }// End of HStack
             Button(action: {}){
                 HStack{
                     Text("Now · Current Location").foregroundColor(.black)
                     Image(systemName: "arrowtriangle.down.fill").foregroundColor(.black)
                 }
                 
+            }// End of Button
+            if(orderMethod == .Delivery){
+                DeliveryView(orderMethod: self.orderMethod, deleveryBtnIsDisabled: self.deleveryBtnIsDisabled, pickupBtnIsDisabled: self.pickupBtnIsDisabled)
+            }else{
+                PickUpView()
             }
-            
-            Spacer()
-        }.frame(maxWidth:.infinity,maxHeight: .infinity)
+        }
+        
     }
+    // End of Vstack
 }
+
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {

@@ -13,6 +13,7 @@ struct FoodAppApp: App {
 
     var body: some Scene {
         WindowGroup {
+            //SearchBar()
             ContentView()
                 //.environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
