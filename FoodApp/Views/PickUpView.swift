@@ -29,8 +29,11 @@ struct PickUpView: View {
                 }
                 SlideOverView{
                     VStack{
-                        Text("Hello")
-                        Spacer()
+                        List{
+                            ResturantView()
+                            ResturantView()
+                            ResturantView()
+                        }
                     }
                 }
             }

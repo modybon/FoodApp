@@ -23,7 +23,6 @@ struct ResturantView: View {
                     print("Tapped")
                     self.isFavourite.toggle()
                 }
-                // TODO: HEART SHAPE BUTTON TO FOR FAVOURITE RESTURANTS
             }
             HStack{
                 VStack(alignment:.leading){

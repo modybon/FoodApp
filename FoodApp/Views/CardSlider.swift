@@ -9,8 +9,10 @@ import SwiftUI
 
 struct CardSlider: ViewModifier {
     @State private var dragging = false
+    // CGSize represents distance vector
     @GestureState private var dragTracker: CGSize = CGSize.zero
-    @State private var position: CGFloat = UIScreen.main.bounds.height - 380
+    // UIScreen.main.bounds.height represents height of the screen
+    @State private var position : CGFloat = UIScreen.main.bounds.height - 380
     
     func body(content: Content) -> some View {
         ZStack(alignment: .top) {
@@ -19,7 +21,9 @@ struct CardSlider: ViewModifier {
                     .frame(width: 40, height: 5.0)
                     .foregroundColor(Color.secondary)
                     .padding(10)
+                
                 content.padding(.top, 30)
+                
             }
             .frame(minWidth: UIScreen.main.bounds.width)
             .scaleEffect(x: 1, y: 1, anchor: .center)
@@ -35,14 +39,24 @@ struct CardSlider: ViewModifier {
     }
     private func onDragEnded(drag: DragGesture.Value) {
         dragging = false
-        let high = UIScreen.main.bounds.height - 100
-        let low: CGFloat = 100
+        let low = UIScreen.main.bounds.height - 320
+        let high : CGFloat = 100
         let dragDirection = drag.predictedEndLocation.y - drag.location.y
         //can also calculate drag offset to make it more rigid to shrink and expand
-        if dragDirection > 0 {
+        // if drag direction < 0 the direction is up if its positive its going down
+        print(#function, "Drag Diection: \(dragDirection)")
+        print(#function, "Predicted Drag End Location: \(drag.predictedEndLocation.y)")
+        print(#function, "Drag Location Y: \(drag.location.y)")
+        
+        
+        if dragDirection < 0 {
+            print(#function, "High: : \(high)")
             position = high
+            print(#function, "Dragged Up")
         } else {
             position = low
+            print(#function, "Low: \(low)")
+            print(#function, "Dragged Down")
         }
     }
 }
