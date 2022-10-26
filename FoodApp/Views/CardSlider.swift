@@ -13,7 +13,7 @@ struct CardSlider: ViewModifier {
     @GestureState private var dragTracker: CGSize = CGSize.zero
     // UIScreen.main.bounds.height represents height of the screen
     @State private var position : CGFloat = UIScreen.main.bounds.height - 380
-    
+    var isFullyExtended : Binding<Bool>
     func body(content: Content) -> some View {
         ZStack(alignment: .top) {
             ZStack(alignment: .top) {
@@ -21,9 +21,8 @@ struct CardSlider: ViewModifier {
                     .frame(width: 40, height: 5.0)
                     .foregroundColor(Color.secondary)
                     .padding(10)
-                
+        
                 content.padding(.top, 30)
-                
             }
             .frame(minWidth: UIScreen.main.bounds.width)
             .scaleEffect(x: 1, y: 1, anchor: .center)
@@ -39,8 +38,8 @@ struct CardSlider: ViewModifier {
     }
     private func onDragEnded(drag: DragGesture.Value) {
         dragging = false
-        let low = UIScreen.main.bounds.height - 320
-        let high : CGFloat = 100
+        let low = UIScreen.main.bounds.height - 380
+        let high : CGFloat = 70
         let dragDirection = drag.predictedEndLocation.y - drag.location.y
         //can also calculate drag offset to make it more rigid to shrink and expand
         // if drag direction < 0 the direction is up if its positive its going down
@@ -53,10 +52,12 @@ struct CardSlider: ViewModifier {
             print(#function, "High: : \(high)")
             position = high
             print(#function, "Dragged Up")
+            self.isFullyExtended.wrappedValue.toggle()
         } else {
             position = low
             print(#function, "Low: \(low)")
             print(#function, "Dragged Down")
+            self.isFullyExtended.wrappedValue.toggle()
         }
     }
 }

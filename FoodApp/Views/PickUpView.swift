@@ -13,6 +13,8 @@ struct PickUpView: View {
     @State var deleveryBtnIsDisabled : Bool = true
     @State var pickupBtnIsDisabled : Bool = false
     @State private var offset = CGSize.zero
+    @State var whiteColorOpacity : Float = 0
+    @State var slideOverIsExpanded : Bool = false
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(
         latitude: 40.83834587046632,
         longitude: 14.254053016537693),
@@ -25,15 +27,69 @@ struct PickUpView: View {
             ZStack(alignment: .bottom){
                 ZStack(alignment:.topLeading){
                     Map(coordinateRegion: $region)
-                    SearchBar(color: .white)
+                    ZStack{
+                        Rectangle()
+                            .foregroundColor((slideOverIsExpanded) ? .white : .clear)
+                            .frame(width: UIScreen.main.bounds.width, height: 80)
+                        SearchBar(color: (slideOverIsExpanded) ? .gray.opacity(0.3) : .white)
+                    }
+                    
                 }
-                SlideOverView{
+                SlideOverView(isFullyExtended: self.$slideOverIsExpanded){
                     VStack{
+                        ScrollView(.horizontal){
+                            LazyHStack(spacing:50){
+                                VStack{
+                                    Image("American")
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                    Text("American")
+                                }.onTapGesture {
+                                    print("American")
+                                }
+                                VStack{
+                                    Image("Asian")
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                    Text("Asian")
+                                }.onTapGesture {
+                                    print("Asian")
+                                }
+                                
+                                VStack{
+                                    Image("Halal")
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                    Text("Halal")
+                                }.onTapGesture {
+                                    print("Halal")
+                                }
+                                
+                                VStack{
+                                    Image("Bakery")
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                    Text("Bakery")
+                                }.onTapGesture {
+                                    print("Bakery")
+                                }
+                                
+                                VStack{
+                                    Image("Healthy")
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                    Text("Healthy")
+                                }.onTapGesture {
+                                    print("Healthy")
+                                }
+                                
+                            }.padding()
+                        }.frame(maxWidth: UIScreen.main.bounds.width,maxHeight: 80)
                         List{
+                            ResturantView().listRowSeparator(.hidden)
                             ResturantView()
                             ResturantView()
-                            ResturantView()
-                        }
+                        }.listStyle(.grouped)
                     }
                 }
             }
