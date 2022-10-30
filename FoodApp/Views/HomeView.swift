@@ -13,6 +13,8 @@ struct HomeView: View {
     @State var orderMethod : OrderMethod = .Delivery
     @State var deleveryBtnIsDisabled : Bool = true
     @State var pickupBtnIsDisabled : Bool = false
+    @State var selected : Int?
+    @State private var isShowingCart = false
     var body: some View {
         VStack{
             HStack{
@@ -27,7 +29,7 @@ struct HomeView: View {
                             Text("Delivery").foregroundColor((self.orderMethod == .Pickup) ? Color.black : Color.white).frame(maxWidth:.infinity,maxHeight: .infinity)
                         }.disabled(self.deleveryBtnIsDisabled)
                     )// End of Rectangle
-
+                
                 Rectangle().foregroundColor((self.orderMethod == .Pickup) ? Color.black : Color.white)
                     .cornerRadius(25).frame(width: 95, height: 35)
                     .overlay(
@@ -40,22 +42,27 @@ struct HomeView: View {
                         }.disabled(self.pickupBtnIsDisabled)
                     )// End of Rectangle
             }// End of HStack
-            Button(action: {}){
+            Button(action: {
+                self.selected = 1
+            }){
                 HStack{
                     Text("Now · Current Location").foregroundColor(.black)
                     Image(systemName: "arrowtriangle.down.fill").foregroundColor(.black)
                 }
-                
+                .onTapGesture {
+                    self.isShowingCart.toggle()
+                }
+                .sheet(isPresented: $isShowingCart){
+                    LocationDetailsView()
+                }
             }// End of Button
             if(orderMethod == .Delivery){
                 DeliveryView(orderMethod: self.orderMethod, deleveryBtnIsDisabled: self.deleveryBtnIsDisabled, pickupBtnIsDisabled: self.pickupBtnIsDisabled)
             }else{
                 PickUpView()
             }
-        }
-        
+        }// End of Vstack
     }
-    // End of Vstack
 }
 
 

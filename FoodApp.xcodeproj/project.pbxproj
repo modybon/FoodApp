@@ -25,6 +25,9 @@
 		2D2089D1290747DD007FEF72 /* CardSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2089D0290747DD007FEF72 /* CardSlider.swift */; };
 		2D667DBB28F905590022392D /* ResturantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D667DBA28F905590022392D /* ResturantView.swift */; };
 		2DC0F4CC2908495900DD2A52 /* SlideOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC0F4CB2908495900DD2A52 /* SlideOverView.swift */; };
+		2DC636972909F84700D5756C /* LocationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC636962909F84600D5756C /* LocationDetailsView.swift */; };
+		2DD0CBCD290DD1D5003C1C23 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD0CBCC290DD1D5003C1C23 /* LocationViewModel.swift */; };
+		2DD0CBD1290DD9A3003C1C23 /* RequestLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD0CBD0290DD9A3003C1C23 /* RequestLocationView.swift */; };
 		2DE39B8828F5DE3600F60A4B /* CartOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE39B8728F5DE3600F60A4B /* CartOrderView.swift */; };
 		2DF0374428FD03790042D80A /* OrderMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF0374328FD03790042D80A /* OrderMethod.swift */; };
 		8B39466CDD414D4685B1CBB3 /* Pods_FoodApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64BC214EB1E97BD21E07EE8 /* Pods_FoodApp.framework */; };
@@ -51,6 +54,9 @@
 		2D2089D0290747DD007FEF72 /* CardSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSlider.swift; sourceTree = "<group>"; };
 		2D667DBA28F905590022392D /* ResturantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturantView.swift; sourceTree = "<group>"; };
 		2DC0F4CB2908495900DD2A52 /* SlideOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOverView.swift; sourceTree = "<group>"; };
+		2DC636962909F84600D5756C /* LocationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsView.swift; sourceTree = "<group>"; };
+		2DD0CBCC290DD1D5003C1C23 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		2DD0CBD0290DD9A3003C1C23 /* RequestLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLocationView.swift; sourceTree = "<group>"; };
 		2DE39B8728F5DE3600F60A4B /* CartOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartOrderView.swift; sourceTree = "<group>"; };
 		2DF0374328FD03790042D80A /* OrderMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderMethod.swift; sourceTree = "<group>"; };
 		B8A334D7EB50598E77A99AC0 /* Pods-FoodApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodApp.release.xcconfig"; path = "Target Support Files/Pods-FoodApp/Pods-FoodApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -115,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				2DF0374328FD03790042D80A /* OrderMethod.swift */,
+				2DD0CBCC290DD1D5003C1C23 /* LocationViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -142,6 +149,8 @@
 				2D2089CC290737F3007FEF72 /* DeliveryView.swift */,
 				2D2089D0290747DD007FEF72 /* CardSlider.swift */,
 				2DC0F4CB2908495900DD2A52 /* SlideOverView.swift */,
+				2DC636962909F84600D5756C /* LocationDetailsView.swift */,
+				2DD0CBD0290DD9A3003C1C23 /* RequestLocationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -279,9 +288,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D2089C92906F07A007FEF72 /* SearchBar.swift in Sources */,
+				2DD0CBD1290DD9A3003C1C23 /* RequestLocationView.swift in Sources */,
 				2D0402C228F514F100F2835F /* BrowseView.swift in Sources */,
 				2D667DBB28F905590022392D /* ResturantView.swift in Sources */,
+				2DD0CBCD290DD1D5003C1C23 /* LocationViewModel.swift in Sources */,
 				2D0402BE28F514BA00F2835F /* AccountView.swift in Sources */,
+				2DC636972909F84700D5756C /* LocationDetailsView.swift in Sources */,
 				2D2089CB2907345C007FEF72 /* PickUpView.swift in Sources */,
 				2D0402AE28F50E1100F2835F /* Persistence.swift in Sources */,
 				2D0402B128F50E1100F2835F /* FoodApp.xcdatamodeld in Sources */,
@@ -427,6 +439,7 @@
 				DEVELOPMENT_TEAM = DBKFCJ6V5K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show you resturants close to you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -457,6 +470,7 @@
 				DEVELOPMENT_TEAM = DBKFCJ6V5K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show you resturants close to you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

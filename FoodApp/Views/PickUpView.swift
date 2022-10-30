@@ -7,6 +7,8 @@
 
 import SwiftUI
 import MapKit
+import CoreLocation
+import CoreLocationUI
 
 struct PickUpView: View {
     @State var orderMethod : OrderMethod = .Delivery
@@ -15,28 +17,49 @@ struct PickUpView: View {
     @State private var offset = CGSize.zero
     @State var whiteColorOpacity : Float = 0
     @State var slideOverIsExpanded : Bool = false
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(
-        latitude: 40.83834587046632,
-        longitude: 14.254053016537693),
-        span: MKCoordinateSpan(
-            latitudeDelta: 0.03,
-            longitudeDelta: 0.03)
-    )
+    @State var searchText: String = ""
+    @StateObject var locationViewModel = LocationViewModel()
+    @State var currentLatitude : Double = 0
+    @State var currentLongitude : Double = 0
+
     var body: some View {
         VStack{
+            switch self.locationViewModel.authorizationStatus {
+            case .notDetermined:
+                Text("Not Determined").onAppear{
+                    locationViewModel.requestPermission()
+                }
+            case .restricted:
+                Text("Restricted")
+            case .denied:
+                Text("Denied").onAppear{
+                    locationViewModel.requestPermission()
+                }
+            case .authorized:
+                Text("Authorized")
+            case .authorizedAlways:
+                Text("Alway Authorized")
+            case .authorizedWhenInUse:
+                Text("")
+            @unknown default:
+                fatalError()
+            }
             ZStack(alignment: .bottom){
+                Text("\(self.currentLongitude)")
+                Text("\(self.currentLatitude)")
                 ZStack(alignment:.topLeading){
-                    Map(coordinateRegion: $region)
+                    Map(coordinateRegion: self.$locationViewModel.region, showsUserLocation: true)
                     ZStack{
                         Rectangle()
                             .foregroundColor((slideOverIsExpanded) ? .white : .clear)
                             .frame(width: UIScreen.main.bounds.width, height: 80)
-                        SearchBar(color: (slideOverIsExpanded) ? .gray.opacity(0.3) : .white)
+                        SearchBar(searchText:$searchText,filterAvailble:true,title: "Food,Drink,etc.", color: (slideOverIsExpanded) ? .gray.opacity(0.3) : .white)
                     }
-                    
                 }
                 SlideOverView(isFullyExtended: self.$slideOverIsExpanded){
                     VStack{
+                        Text("Lattitude: \(locationViewModel.lastSeenLocation?.coordinate.latitude ?? 0)")
+                        Text("Longitude: \(locationViewModel.lastSeenLocation?.coordinate.longitude ?? 0)")
                         ScrollView(.horizontal){
                             LazyHStack(spacing:50){
                                 VStack{
@@ -94,6 +117,9 @@ struct PickUpView: View {
                 }
             }
             //Spacer()
+        }.onAppear{
+            self.currentLongitude = locationViewModel.lastSeenLocation?.coordinate.longitude ?? 0
+            self.currentLatitude = locationViewModel.lastSeenLocation?.coordinate.latitude ?? 0
         }
     }
 }

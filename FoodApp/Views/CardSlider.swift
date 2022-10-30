@@ -52,12 +52,12 @@ struct CardSlider: ViewModifier {
             print(#function, "High: : \(high)")
             position = high
             print(#function, "Dragged Up")
-            self.isFullyExtended.wrappedValue.toggle()
+            self.isFullyExtended.wrappedValue = true
         } else {
             position = low
             print(#function, "Low: \(low)")
             print(#function, "Dragged Down")
-            self.isFullyExtended.wrappedValue.toggle()
+            self.isFullyExtended.wrappedValue = false
         }
     }
 }

@@ -12,9 +12,10 @@ struct DeliveryView: View {
     @State var orderMethod : OrderMethod
     @State var deleveryBtnIsDisabled : Bool
     @State var pickupBtnIsDisabled : Bool
+    @State var searchText : String = ""
     var body: some View {
         VStack{
-            SearchBar(color: .gray.opacity(0.3))
+            SearchBar(searchText:$searchText,filterAvailble: true, title: "Food, Deliver,etc.",color: .gray.opacity(0.3))
             List{
                 ResturantView()
                 ResturantView()
