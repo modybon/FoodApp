@@ -14,8 +14,9 @@ struct AccountView: View {
     var body: some View {
         NavigationView{
             Section{
-                Text("My Account")
+                Text("My Account").fontWeight(.bold)
             }
+            List{
             VStack{
                 HStack{
                     Text("Name: ")
@@ -32,6 +33,7 @@ struct AccountView: View {
                     Spacer()
                     //Text(User.username)
                 }
+            }
             }
         }
     }
