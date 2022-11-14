@@ -15,14 +15,14 @@ class User: Identifiable, ObservableObject{
     var favRestaurants: [String]
     var savedAddresses: [String]
     
-    init(){
+    init(uName: String, pass: String, email: String, phone: Int, favRes: [String], savedAddresses: [String]){
         self.id = UUID()
-        self.userName = "userName"
-        self.email = "email"
-        self.password = "password"
-        self.phone = 123
-        self.favRestaurants = ["favRestaurants"]
-        self.savedAddresses = ["savedAddresses"]
+        self.userName = uName
+        self.email = email
+        self.password = pass
+        self.phone = phone
+        self.favRestaurants = favRes
+        self.savedAddresses = savedAddresses
     }
     
 }
