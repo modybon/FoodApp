@@ -8,8 +8,32 @@
 import SwiftUI
 
 struct AccountView: View {
+    
+    @EnvironmentObject var user: User
+    
     var body: some View {
-        Text("Account")
+        NavigationView{
+            Section{
+                Text("My Account")
+            }
+            VStack{
+                HStack{
+                    Text("Name: ")
+                    Spacer()
+                   // Text(user.userName)
+                }
+                HStack{
+                    Text("Email: ")
+                    Spacer()
+                  //  Text(user.email)
+                }
+                HStack{
+                    Text("Saved Addresses: ")
+                    Spacer()
+                    //Text(User.username)
+                }
+            }
+        }
     }
 }
 
