@@ -18,11 +18,16 @@ struct PickUpView: View {
     @State var whiteColorOpacity : Float = 0
     @State var slideOverIsExpanded : Bool = false
     @State var searchText: String = ""
-    @StateObject var locationViewModel = LocationViewModel()
+    @EnvironmentObject var locationViewModel : LocationHelper
     @State var currentLatitude : Double = 0
     @State var currentLongitude : Double = 0
-
     var body: some View {
+        let resturants : [ResturantPin] = [
+            ResturantPin(name: "MacDonalds", location:CLLocationCoordinate2D(latitude: 37.714334 - 0.0002123123 , longitude: -122.408227 - 0.00123123123 ), rating: 4.3),
+            ResturantPin(name: "Burger King", location:CLLocationCoordinate2D(latitude: 37.714334 - 0.000219723492 , longitude: -122.408227 - 0.0017623452 ), rating: 3.9),
+            ResturantPin(name: "Pizza Dominos", location:CLLocationCoordinate2D(latitude: 37.714334 - 0.000523423 , longitude: -122.408227 - 0.0012342342 ), rating: 5.0),
+            ResturantPin(name: "Paradise Chicken", location:CLLocationCoordinate2D(latitude: 37.714334 - 0.000264533 , longitude: -122.408227 - 0.0012921638721 ), rating: 4.7)
+        ]
         VStack{
             switch self.locationViewModel.authorizationStatus {
             case .notDetermined:
@@ -48,7 +53,19 @@ struct PickUpView: View {
                 Text("\(self.currentLongitude)")
                 Text("\(self.currentLatitude)")
                 ZStack(alignment:.topLeading){
-                    Map(coordinateRegion: self.$locationViewModel.region, showsUserLocation: true)
+//                    Map(coordinateRegion: self.$locationViewModel.region, interactionModes: [.all], showsUserLocation: true, userTrackingMode: .constant(.follow), annotationItems: resturants){ place in
+//                        MapAnnotation(coordinate:place.coordinate){
+//                            Circle()
+//                                .foregroundColor(.white)
+//                                .frame(width:35,height: 35)
+//                                .overlay(
+//                                    Text("\(String(format: "%.1f", place.rating))").font(.caption)
+//                                ).onTapGesture {
+//                                    print("Resturant Tapped ")
+//                                }
+//                        }
+//                    }
+                    CustomMapView()
                     ZStack{
                         Rectangle()
                             .foregroundColor((slideOverIsExpanded) ? .white : .clear)
@@ -58,8 +75,8 @@ struct PickUpView: View {
                 }
                 SlideOverView(isFullyExtended: self.$slideOverIsExpanded){
                     VStack{
-                        Text("Lattitude: \(locationViewModel.lastSeenLocation?.coordinate.latitude ?? 0)")
-                        Text("Longitude: \(locationViewModel.lastSeenLocation?.coordinate.longitude ?? 0)")
+                        Text("Lattitude: \(locationViewModel.currentLocation?.coordinate.latitude ?? 0)")
+                        Text("Longitude: \(locationViewModel.currentLocation?.coordinate.longitude ?? 0)")
                         ScrollView(.horizontal){
                             LazyHStack(spacing:50){
                                 VStack{
@@ -117,9 +134,6 @@ struct PickUpView: View {
                 }
             }
             //Spacer()
-        }.onAppear{
-            self.currentLongitude = locationViewModel.lastSeenLocation?.coordinate.longitude ?? 0
-            self.currentLatitude = locationViewModel.lastSeenLocation?.coordinate.latitude ?? 0
         }
     }
 }

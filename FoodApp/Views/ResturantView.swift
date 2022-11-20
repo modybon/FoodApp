@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ResturantView: View {
+    // TODO: if its being used in pickup view it will also show distance from the user location
     @State var isFavourite : Bool = false
     var body: some View {
         let heartImage : String = (self.isFavourite) ?  "heart.fill" : "heart"
         VStack(alignment:.leading){
-            
             ZStack(alignment:.topTrailing){
                 Image(systemName: "person.fill")
                     .frame(maxWidth:.infinity,minHeight: 150)

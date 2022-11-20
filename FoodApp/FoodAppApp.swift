@@ -10,11 +10,12 @@ import SwiftUI
 @main
 struct FoodAppApp: App {
     //let persistenceController = PersistenceController.shared
-
+    let locationhelper : LocationHelper = LocationHelper()
     var body: some Scene {
         WindowGroup {
             //SearchBar()
             ContentView()
+                .environmentObject(locationhelper)
                 //.environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
