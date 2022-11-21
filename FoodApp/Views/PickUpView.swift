@@ -18,9 +18,10 @@ struct PickUpView: View {
     @State var whiteColorOpacity : Float = 0
     @State var slideOverIsExpanded : Bool = false
     @State var searchText: String = ""
-    @EnvironmentObject var locationViewModel : LocationHelper
+    @EnvironmentObject var locationHelper : LocationHelper
     @State var currentLatitude : Double = 0
     @State var currentLongitude : Double = 0
+    @EnvironmentObject var resturantHelper : ResturantHelper 
     var body: some View {
         let resturants : [ResturantPin] = [
             ResturantPin(name: "MacDonalds", location:CLLocationCoordinate2D(latitude: 37.714334 - 0.0002123123 , longitude: -122.408227 - 0.00123123123 ), rating: 4.3),
@@ -29,16 +30,16 @@ struct PickUpView: View {
             ResturantPin(name: "Paradise Chicken", location:CLLocationCoordinate2D(latitude: 37.714334 - 0.000264533 , longitude: -122.408227 - 0.0012921638721 ), rating: 4.7)
         ]
         VStack{
-            switch self.locationViewModel.authorizationStatus {
+            switch self.locationHelper.authorizationStatus {
             case .notDetermined:
                 Text("Not Determined").onAppear{
-                    locationViewModel.requestPermission()
+                    locationHelper.requestPermission()
                 }
             case .restricted:
                 Text("Restricted")
             case .denied:
                 Text("Denied").onAppear{
-                    locationViewModel.requestPermission()
+                    locationHelper.requestPermission()
                 }
             case .authorized:
                 Text("Authorized")
@@ -53,19 +54,9 @@ struct PickUpView: View {
                 Text("\(self.currentLongitude)")
                 Text("\(self.currentLatitude)")
                 ZStack(alignment:.topLeading){
-//                    Map(coordinateRegion: self.$locationViewModel.region, interactionModes: [.all], showsUserLocation: true, userTrackingMode: .constant(.follow), annotationItems: resturants){ place in
-//                        MapAnnotation(coordinate:place.coordinate){
-//                            Circle()
-//                                .foregroundColor(.white)
-//                                .frame(width:35,height: 35)
-//                                .overlay(
-//                                    Text("\(String(format: "%.1f", place.rating))").font(.caption)
-//                                ).onTapGesture {
-//                                    print("Resturant Tapped ")
-//                                }
-//                        }
-//                    }
-                    CustomMapView()
+                    
+                    CustomMapView().environmentObject(self.resturantHelper)
+                    
                     ZStack{
                         Rectangle()
                             .foregroundColor((slideOverIsExpanded) ? .white : .clear)
@@ -75,8 +66,9 @@ struct PickUpView: View {
                 }
                 SlideOverView(isFullyExtended: self.$slideOverIsExpanded){
                     VStack{
-                        Text("Lattitude: \(locationViewModel.currentLocation?.coordinate.latitude ?? 0)")
-                        Text("Longitude: \(locationViewModel.currentLocation?.coordinate.longitude ?? 0)")
+                        Text("Lattitude: \(locationHelper.currentLocation?.coordinate.latitude ?? 0)")
+                        Text("Longitude: \(locationHelper.currentLocation?.coordinate.longitude ?? 0)")
+                        Text("Resturant Name: \(self.$resturantHelper.currentResturantMapItem.wrappedValue?.name ?? "NA")")
                         ScrollView(.horizontal){
                             LazyHStack(spacing:50){
                                 VStack{
@@ -126,9 +118,9 @@ struct PickUpView: View {
                             }.padding()
                         }.frame(maxWidth: UIScreen.main.bounds.width,maxHeight: 80)
                         List{
-                            ResturantView().listRowSeparator(.hidden)
-                            ResturantView()
-                            ResturantView()
+                            ResturantView(resturantName: "mac").listRowSeparator(.hidden)
+                            ResturantView(resturantName: "mac")
+                            ResturantView(resturantName: "mac")
                         }.listStyle(.grouped)
                     }
                 }
@@ -143,3 +135,18 @@ struct PickUpView_Previews: PreviewProvider {
         PickUpView()
     }
 }
+
+
+
+//                    Map(coordinateRegion: self.$locationViewModel.region, interactionModes: [.all], showsUserLocation: true, userTrackingMode: .constant(.follow), annotationItems: resturants){ place in
+//                        MapAnnotation(coordinate:place.coordinate){
+//                            Circle()
+//                                .foregroundColor(.white)
+//                                .frame(width:35,height: 35)
+//                                .overlay(
+//                                    Text("\(String(format: "%.1f", place.rating))").font(.caption)
+//                                ).onTapGesture {
+//                                    print("Resturant Tapped ")
+//                                }
+//                        }
+//                    }

@@ -10,9 +10,12 @@ import MapKit
 
 struct CustomMapView: View {
     @EnvironmentObject var locationHelper : LocationHelper
+    @EnvironmentObject var resturantHelper : ResturantHelper
     var body: some View {
         if(self.locationHelper.currentLocation != nil){
-            MyMapView().environmentObject(locationHelper)
+            MyMapView()
+                .environmentObject(locationHelper)
+                .environmentObject(resturantHelper)
         }else{
             Text("No Location")
         }
@@ -28,7 +31,7 @@ struct CustomMapView: View {
 struct MyMapView : UIViewRepresentable{
     typealias UIViewType = MKMapView
     @EnvironmentObject var locationHelper : LocationHelper
-    
+    @EnvironmentObject var resturantHelper : ResturantHelper
     func updateUIView(_ uiView: UIViewType, context: Context) {
         let sourceCodinates : CLLocationCoordinate2D
         let region : MKCoordinateRegion
@@ -37,7 +40,9 @@ struct MyMapView : UIViewRepresentable{
         }else{
             sourceCodinates = CLLocationCoordinate2D(latitude: 43.6452, longitude: -79.282639423)
         }
-        region = MKCoordinateRegion(center: sourceCodinates, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
+        region = MKCoordinateRegion(center: sourceCodinates,
+                                    span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
+        )
         uiView.mapType = .mutedStandard
         uiView.region = region
         uiView.showsUserLocation = true
@@ -65,23 +70,13 @@ struct MyMapView : UIViewRepresentable{
                 print("\(item.name): \nUrl:\(item.url)\nPhone Number: \(item.phoneNumber)")
             }
         }
-//
-//        let direction = MKDirections(request: request)
-//        direction.calculate(){ response , error in
-//            guard let route = response?.routes.first else{return}
-//            uiView.addAnnotations([p2])
-//            uiView.addOverlay(route.polyline)
-//            uiView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-//        }
-//
-//
     }
     
     func makeCoordinator() -> MapViewCoordinator {
         if(self.locationHelper.currentLocation != nil){
-            return MapViewCoordinator(currentLocation: self.$locationHelper.currentLocation)
+            return MapViewCoordinator(currentLocation: self.$locationHelper.currentLocation,currentResturantAnnotation: self.$resturantHelper.currentResturantAnnotation , currentResturantMapItem: $resturantHelper.currentResturantMapItem)
         }else{
-            return MapViewCoordinator(currentLocation: self.$locationHelper.lastSeenLocation)
+            return MapViewCoordinator(currentLocation: self.$locationHelper.lastSeenLocation, currentResturantAnnotation: self.$resturantHelper.currentResturantAnnotation, currentResturantMapItem: $resturantHelper.currentResturantMapItem)
         }
         
     }
@@ -125,6 +120,7 @@ struct MyMapView : UIViewRepresentable{
                 mapAnnotation.coordinate.latitude = item.placemark.coordinate.latitude
                 mapAnnotation.title = item.name
                 map.addAnnotation(mapAnnotation)
+            
                 print("\(item.name): \nUrl:\(item.url)\nPhone Number: \(item.phoneNumber)")
             }
         }
@@ -137,8 +133,12 @@ struct MyMapView : UIViewRepresentable{
 class MapViewCoordinator : NSObject, MKMapViewDelegate{
     var currentLocation : Binding<CLLocation?>
     var currentOverlay : MKOverlay?
-    init(currentLocation: Binding<CLLocation?>) {
+    var currentResturantAnnotation : Binding<MKAnnotation?>
+    var currentResturantMapItem : Binding<MKMapItem?>
+    init(currentLocation: Binding<CLLocation?>, currentResturantAnnotation: Binding<MKAnnotation?>, currentResturantMapItem : Binding<MKMapItem?>) {
         self.currentLocation = currentLocation
+        self.currentResturantAnnotation = currentResturantAnnotation
+        self.currentResturantMapItem = currentResturantMapItem
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -159,28 +159,40 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate{
         
         let p1 = MKPlacemark(coordinate: sourceCordinate)
         let p2 = MKPlacemark(coordinate: view.annotation!.coordinate)
-
+        
                 
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: p1)
         request.destination = MKMapItem(placemark: p2)
         request.transportType = .walking
         
+        self.currentResturantAnnotation.wrappedValue = view.annotation!
+        
+        //print(#function,"Current Resturant: \(self.currentResturant.wrappedValue?.title! ?? "NA")")
+        
+        let searchRequest = MKLocalSearch.Request()
+        searchRequest.region = mapView.region
+        searchRequest.naturalLanguageQuery = self.currentResturantAnnotation.wrappedValue?.title!
+        let search = MKLocalSearch(request: searchRequest)
+        search.start(){ response, error in
+            guard let response = response else{
+                print(#function, "response is null \(error)")
+                return
+            }
+            for item in response.mapItems{
+                self.currentResturantMapItem.wrappedValue = item
+                print("Resturant Selected: \(item.name): \nUrl:\(item.url)\nPhone Number: \(item.phoneNumber)")
+            }
+        }
+        
         let direction = MKDirections(request: request)
         direction.calculate(){ response , error in
             guard let route = response?.routes.first else{return}
+            print(#function, "Distance: \(route.distance)")
             mapView.addAnnotations([p2])
             self.currentOverlay = route.polyline
             mapView.addOverlay(route.polyline)
             mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
         }
     }
-}
-
-
-
-class CustomAnnotationView : MKAnnotationView {
-    
-    
-    
 }
