@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct ResturantView: View {
+    // TODO: if its being used in pickup view it will also show distance from the user location
     @State var isFavourite : Bool = false
+    var resturantName : String
     var body: some View {
         let heartImage : String = (self.isFavourite) ?  "heart.fill" : "heart"
         VStack(alignment:.leading){
-            
             ZStack(alignment:.topTrailing){
                 Image(systemName: "person.fill")
                     .frame(maxWidth:.infinity,minHeight: 150)
@@ -26,7 +27,7 @@ struct ResturantView: View {
             }
             HStack{
                 VStack(alignment:.leading){
-                    Text("Macdonald's")
+                    Text("\(self.resturantName)")
                     Text("$0.99 Delivery Fee 20-35 min")
                 }
                 Spacer()
@@ -48,6 +49,6 @@ struct ResturantView: View {
 
 struct ResturantView_Previews: PreviewProvider {
     static var previews: some View {
-        ResturantView()
+        ResturantView(resturantName: "Mac")
     }
 }

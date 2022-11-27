@@ -9,12 +9,13 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    @EnvironmentObject var locationHelper : LocationHelper
     var body: some View {
         TabView(){
             HomeView().tabItem{
                 Image(systemName: "house.fill")
                 Text("Home")
-            }
+            }.environmentObject(locationHelper)
             BrowseView().tabItem{
                 Image(systemName: "magnifyingglass")
                 Text("Browse")

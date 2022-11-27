@@ -6,15 +6,17 @@
 //
 
 import SwiftUI
-
+import MapKit
 struct HomeView: View {
     let orangeColor = Color(red: 0.968, green: 0.546, blue: 0.461)
+    @EnvironmentObject var locationHelper : LocationHelper
     @State var searchResturant : String = ""
     @State var orderMethod : OrderMethod = .Delivery
     @State var deleveryBtnIsDisabled : Bool = true
     @State var pickupBtnIsDisabled : Bool = false
     @State var selected : Int?
     @State private var isShowingCart = false
+    @State var resturantHelper : ResturantHelper = ResturantHelper()
     var body: some View {
         VStack{
             HStack{
@@ -57,11 +59,15 @@ struct HomeView: View {
                 }
             }// End of Button
             if(orderMethod == .Delivery){
-                DeliveryView(orderMethod: self.orderMethod, deleveryBtnIsDisabled: self.deleveryBtnIsDisabled, pickupBtnIsDisabled: self.pickupBtnIsDisabled)
+                DeliveryView(orderMethod: self.orderMethod, deleveryBtnIsDisabled: self.deleveryBtnIsDisabled, pickupBtnIsDisabled: self.pickupBtnIsDisabled).environmentObject(self.locationHelper)
             }else{
-                PickUpView()
+                PickUpView().environmentObject(self.resturantHelper)
             }
-        }// End of Vstack
+        }
+        .onAppear{
+
+            // End of Vstack
+        }
     }
 }
 

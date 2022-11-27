@@ -13,23 +13,24 @@ struct DeliveryView: View {
     @State var deleveryBtnIsDisabled : Bool
     @State var pickupBtnIsDisabled : Bool
     @State var searchText : String = ""
+    @EnvironmentObject var locationHelper : LocationHelper
     var body: some View {
         VStack{
             SearchBar(searchText:$searchText,filterAvailble: true, title: "Food, Deliver,etc.",color: .gray.opacity(0.3))
-            List{
-                ResturantView()
-                ResturantView()
-                ResturantView()
-                ResturantView()
-                ResturantView()
-                ResturantView()
-                ResturantView()
-            }.listStyle(.grouped)
-            .refreshable {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 8.0) { // Change `2.0` to the desired number of seconds.
-                   // Code you want to be delayed
-                    print("Refreshed")
+            if(!self.$locationHelper.resturantsList.isEmpty){
+                List{
+                    ForEach(self.$locationHelper.resturantsList){ resturant in
+                        ResturantView(resturantName: resturant.wrappedValue.name)
+                    }
+                }.listStyle(.grouped)
+                .refreshable {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 8.0) { // Change `2.0` to the desired number of seconds.
+                       // Code you want to be delayed
+                        print("Refreshed")
+                    }
                 }
+            }else{
+                Text("NO RESTURANTS NEAR BY 😢")
             }
             Spacer()
            
@@ -43,3 +44,6 @@ struct DeliveryView_Previews: PreviewProvider {
         DeliveryView(orderMethod: .Delivery, deleveryBtnIsDisabled: false, pickupBtnIsDisabled: true)
     }
 }
+
+
+
