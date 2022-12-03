@@ -32,6 +32,7 @@ struct MyMapView : UIViewRepresentable{
     typealias UIViewType = MKMapView
     @EnvironmentObject var locationHelper : LocationHelper
     @EnvironmentObject var resturantHelper : ResturantHelper
+    
     func updateUIView(_ uiView: UIViewType, context: Context) {
         let sourceCodinates : CLLocationCoordinate2D
         let region : MKCoordinateRegion
@@ -55,7 +56,7 @@ struct MyMapView : UIViewRepresentable{
         let search = MKLocalSearch(request: searchRequest)
         search.start(){ response, error in
             guard let response = response else{
-                print(#function, "response is null \(error)")
+                print(#function, "response is null \(error!)")
                 return
             }
             for item in response.mapItems{
@@ -67,7 +68,7 @@ struct MyMapView : UIViewRepresentable{
                 mapAnnotation.coordinate.latitude = item.placemark.coordinate.latitude
                 mapAnnotation.title = item.name
                 uiView.addAnnotation(mapAnnotation)
-                print("\(item.name): \nUrl:\(item.url)\nPhone Number: \(item.phoneNumber)")
+                print("\(item.name ?? "NA")\nPhone Number: \(item.phoneNumber ?? "NA")")
             }
         }
     }
@@ -107,21 +108,19 @@ struct MyMapView : UIViewRepresentable{
         let search = MKLocalSearch(request: searchRequest)
         search.start(){ response, error in
             guard let response = response else{
-                print(#function, "response is null \(error)")
+                print(#function, "response is null \(error!)")
                 return
             }
             for item in response.mapItems{
                 let mapAnnotation = MKPointAnnotation()
                 let annotationView = MKAnnotationView()
-                annotationView.image = UIImage(systemName: "cloud.fill")
-                annotationView.setSelected(true, animated: true)
+                //annotationView.setSelected(true, animated: true)
                 annotationView.annotation = mapAnnotation
                 mapAnnotation.coordinate.longitude = item.placemark.coordinate.longitude
                 mapAnnotation.coordinate.latitude = item.placemark.coordinate.latitude
                 mapAnnotation.title = item.name
                 map.addAnnotation(mapAnnotation)
-            
-                print("\(item.name): \nUrl:\(item.url)\nPhone Number: \(item.phoneNumber)")
+            //print("\(item.name): \nUrl:\(item.url)\nPhone Number: \(item.phoneNumber)")
             }
         }
         return map
@@ -157,14 +156,6 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate{
         //print(view.annotation?.coordinate)
         let sourceCordinate = CLLocationCoordinate2D(latitude: currentLocation.wrappedValue!.coordinate.latitude, longitude: currentLocation.wrappedValue!.coordinate.longitude)
         
-        let p1 = MKPlacemark(coordinate: sourceCordinate)
-        let p2 = MKPlacemark(coordinate: view.annotation!.coordinate)
-        
-                
-        let request = MKDirections.Request()
-        request.source = MKMapItem(placemark: p1)
-        request.destination = MKMapItem(placemark: p2)
-        request.transportType = .walking
         
         self.currentResturantAnnotation.wrappedValue = view.annotation!
         
@@ -176,16 +167,24 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate{
         let search = MKLocalSearch(request: searchRequest)
         search.start(){ response, error in
             guard let response = response else{
-                print(#function, "response is null \(error)")
+                print(#function, "response is null \(error!)")
                 return
             }
             for item in response.mapItems{
                 self.currentResturantMapItem.wrappedValue = item
-                print("Resturant Selected: \(item.name): \nUrl:\(item.url)\nPhone Number: \(item.phoneNumber)")
+                print("Resturant Selected: \(item.name ?? "NA")\nPhone Number: \(item.phoneNumber ?? "NA")")
             }
         }
+        let p1 = MKPlacemark(coordinate: sourceCordinate)
+        let p2 = MKPlacemark(coordinate: view.annotation!.coordinate)
         
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: p1)
+        request.destination = MKMapItem(placemark: p2)
+        request.transportType = .walking
+
         let direction = MKDirections(request: request)
+        
         direction.calculate(){ response , error in
             guard let route = response?.routes.first else{return}
             print(#function, "Distance: \(route.distance)")
@@ -194,5 +193,7 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate{
             mapView.addOverlay(route.polyline)
             mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
         }
+        
     }
+    
 }

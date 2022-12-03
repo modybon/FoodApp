@@ -23,12 +23,18 @@
 		2D2089CB2907345C007FEF72 /* PickUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2089CA2907345C007FEF72 /* PickUpView.swift */; };
 		2D2089CD290737F3007FEF72 /* DeliveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2089CC290737F3007FEF72 /* DeliveryView.swift */; };
 		2D2089D1290747DD007FEF72 /* CardSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2089D0290747DD007FEF72 /* CardSlider.swift */; };
+		2D31A288293300B50095B9DD /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D31A287293300B50095B9DD /* Delay.swift */; };
+		2D31A28A293318CF0095B9DD /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D31A289293318CF0095B9DD /* FilterView.swift */; };
 		2D3CA0D7292AC90E0059B33D /* ResturantHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3CA0D6292AC90E0059B33D /* ResturantHelper.swift */; };
 		2D3CA0D9292B36160059B33D /* Resturant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3CA0D8292B36160059B33D /* Resturant.swift */; };
 		2D44107C29158DBA00AA19D0 /* CustomMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D44107B29158DBA00AA19D0 /* CustomMapView.swift */; };
 		2D44107E2915D09400AA19D0 /* ResturantPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D44107D2915D09400AA19D0 /* ResturantPin.swift */; };
 		2D667DBB28F905590022392D /* ResturantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D667DBA28F905590022392D /* ResturantView.swift */; };
+		2D8185462933E8EE00CB73F8 /* DietryOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8185452933E8EE00CB73F8 /* DietryOptions.swift */; };
+		2D8185482934416C00CB73F8 /* FilterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8185472934416C00CB73F8 /* FilterHelper.swift */; };
 		2DC0F4CC2908495900DD2A52 /* SlideOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC0F4CB2908495900DD2A52 /* SlideOverView.swift */; };
+		2DC20FC1292FEBB800633238 /* DeliveringOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC20FC0292FEBB800633238 /* DeliveringOrderView.swift */; };
+		2DC20FC3292FED5300633238 /* DeliveringMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC20FC2292FED5300633238 /* DeliveringMapView.swift */; };
 		2DC636972909F84700D5756C /* LocationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC636962909F84600D5756C /* LocationDetailsView.swift */; };
 		2DD0CBCD290DD1D5003C1C23 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD0CBCC290DD1D5003C1C23 /* LocationHelper.swift */; };
 		2DE39B8828F5DE3600F60A4B /* CartOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE39B8728F5DE3600F60A4B /* CartOrderView.swift */; };
@@ -55,12 +61,18 @@
 		2D2089CA2907345C007FEF72 /* PickUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpView.swift; sourceTree = "<group>"; };
 		2D2089CC290737F3007FEF72 /* DeliveryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryView.swift; sourceTree = "<group>"; };
 		2D2089D0290747DD007FEF72 /* CardSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSlider.swift; sourceTree = "<group>"; };
+		2D31A287293300B50095B9DD /* Delay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
+		2D31A289293318CF0095B9DD /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		2D3CA0D6292AC90E0059B33D /* ResturantHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturantHelper.swift; sourceTree = "<group>"; };
 		2D3CA0D8292B36160059B33D /* Resturant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resturant.swift; sourceTree = "<group>"; };
 		2D44107B29158DBA00AA19D0 /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
 		2D44107D2915D09400AA19D0 /* ResturantPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturantPin.swift; sourceTree = "<group>"; };
 		2D667DBA28F905590022392D /* ResturantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturantView.swift; sourceTree = "<group>"; };
+		2D8185452933E8EE00CB73F8 /* DietryOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietryOptions.swift; sourceTree = "<group>"; };
+		2D8185472934416C00CB73F8 /* FilterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterHelper.swift; sourceTree = "<group>"; };
 		2DC0F4CB2908495900DD2A52 /* SlideOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOverView.swift; sourceTree = "<group>"; };
+		2DC20FC0292FEBB800633238 /* DeliveringOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveringOrderView.swift; sourceTree = "<group>"; };
+		2DC20FC2292FED5300633238 /* DeliveringMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveringMapView.swift; sourceTree = "<group>"; };
 		2DC636962909F84600D5756C /* LocationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsView.swift; sourceTree = "<group>"; };
 		2DD0CBCC290DD1D5003C1C23 /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 		2DE39B8728F5DE3600F60A4B /* CartOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartOrderView.swift; sourceTree = "<group>"; };
@@ -131,6 +143,9 @@
 				2D44107D2915D09400AA19D0 /* ResturantPin.swift */,
 				2D3CA0D6292AC90E0059B33D /* ResturantHelper.swift */,
 				2D3CA0D8292B36160059B33D /* Resturant.swift */,
+				2D31A287293300B50095B9DD /* Delay.swift */,
+				2D8185452933E8EE00CB73F8 /* DietryOptions.swift */,
+				2D8185472934416C00CB73F8 /* FilterHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -160,6 +175,9 @@
 				2DC0F4CB2908495900DD2A52 /* SlideOverView.swift */,
 				2DC636962909F84600D5756C /* LocationDetailsView.swift */,
 				2D44107B29158DBA00AA19D0 /* CustomMapView.swift */,
+				2DC20FC0292FEBB800633238 /* DeliveringOrderView.swift */,
+				2DC20FC2292FED5300633238 /* DeliveringMapView.swift */,
+				2D31A289293318CF0095B9DD /* FilterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -193,6 +211,7 @@
 				2D04029E28F50E0E00F2835F /* Frameworks */,
 				2D04029F28F50E0E00F2835F /* Resources */,
 				891F04077C5BE32E1221C6A2 /* [CP] Embed Pods Frameworks */,
+				C805EC03CCFF22CAE524268A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -289,6 +308,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C805EC03CCFF22CAE524268A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodApp/Pods-FoodApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodApp/Pods-FoodApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodApp/Pods-FoodApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -297,9 +333,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D2089C92906F07A007FEF72 /* SearchBar.swift in Sources */,
+				2D8185482934416C00CB73F8 /* FilterHelper.swift in Sources */,
 				2D0402C228F514F100F2835F /* BrowseView.swift in Sources */,
 				2D667DBB28F905590022392D /* ResturantView.swift in Sources */,
 				2DD0CBCD290DD1D5003C1C23 /* LocationHelper.swift in Sources */,
+				2D31A28A293318CF0095B9DD /* FilterView.swift in Sources */,
+				2DC20FC1292FEBB800633238 /* DeliveringOrderView.swift in Sources */,
 				2D0402BE28F514BA00F2835F /* AccountView.swift in Sources */,
 				2DC636972909F84700D5756C /* LocationDetailsView.swift in Sources */,
 				2D2089CB2907345C007FEF72 /* PickUpView.swift in Sources */,
@@ -309,6 +348,7 @@
 				2D2089D1290747DD007FEF72 /* CardSlider.swift in Sources */,
 				2DE39B8828F5DE3600F60A4B /* CartOrderView.swift in Sources */,
 				2D3CA0D9292B36160059B33D /* Resturant.swift in Sources */,
+				2D8185462933E8EE00CB73F8 /* DietryOptions.swift in Sources */,
 				2D0402BB28F5149600F2835F /* HomeView.swift in Sources */,
 				2DF0374428FD03790042D80A /* OrderMethod.swift in Sources */,
 				2D3CA0D7292AC90E0059B33D /* ResturantHelper.swift in Sources */,
@@ -316,9 +356,11 @@
 				2D0402C028F514DA00F2835F /* BasketView.swift in Sources */,
 				2DC0F4CC2908495900DD2A52 /* SlideOverView.swift in Sources */,
 				2D44107E2915D09400AA19D0 /* ResturantPin.swift in Sources */,
+				2DC20FC3292FED5300633238 /* DeliveringMapView.swift in Sources */,
 				2D0402A528F50E0E00F2835F /* FoodAppApp.swift in Sources */,
 				2D2089CD290737F3007FEF72 /* DeliveryView.swift in Sources */,
 				2D0402C428F5150200F2835F /* OrdersView.swift in Sources */,
+				2D31A288293300B50095B9DD /* Delay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

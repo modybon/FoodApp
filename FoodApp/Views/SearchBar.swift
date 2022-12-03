@@ -12,6 +12,9 @@ struct SearchBar: View {
     var filterAvailble : Bool
     var title: String
     var color : Color
+    @State private var isshowingFilterView = false
+    @State var selected : Int?
+    @EnvironmentObject var locationHelper : LocationHelper
     var body: some View {
         Rectangle()
             .foregroundColor(color)
@@ -29,9 +32,17 @@ struct SearchBar: View {
                             Rectangle()
                                 .foregroundColor(.gray.opacity(0.3))
                                 .frame(maxWidth:1,maxHeight: 42)
-                            Image(systemName: "slider.horizontal.3")
-                                .font(.system( size: 30, weight: .bold, design: .default))
-                                .padding(.trailing)
+                            Button(action:{
+                                self.selected = 1
+                                isshowingFilterView.toggle()
+                            }){
+                                Image(systemName: "slider.horizontal.3")
+                                    .foregroundColor(.black)
+                                    .font(.system( size: 30, weight: .bold, design: .default))
+                                    .padding(.trailing)
+                            }.sheet(isPresented: $isshowingFilterView){
+                                FilterView().environmentObject(self.locationHelper)
+                            }
                         }
                     }
                 }.padding([.leading,.trailing])

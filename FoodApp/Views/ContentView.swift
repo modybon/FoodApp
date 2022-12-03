@@ -10,12 +10,15 @@ import CoreData
 
 struct ContentView: View {
     @EnvironmentObject var locationHelper : LocationHelper
+    //@EnvironmentObject var filterHelper : FilterHelper
     var body: some View {
         TabView(){
             HomeView().tabItem{
                 Image(systemName: "house.fill")
                 Text("Home")
-            }.environmentObject(locationHelper)
+            }
+            .environmentObject(locationHelper)
+            //.environmentObject(filterHelper)
             BrowseView().tabItem{
                 Image(systemName: "magnifyingglass")
                 Text("Browse")

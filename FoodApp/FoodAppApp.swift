@@ -10,12 +10,15 @@ import SwiftUI
 @main
 struct FoodAppApp: App {
     //let persistenceController = PersistenceController.shared
-    let locationhelper : LocationHelper = LocationHelper()
+    let filterHelper : FilterHelper = FilterHelper()
+    //let locationhelper : LocationHelper = LocationHelper(filterHelper: <#T##FilterHelper#>)
     var body: some Scene {
         WindowGroup {
-            //SearchBar()
             ContentView()
-                .environmentObject(locationhelper)
+                .environmentObject(LocationHelper(filterHelper: filterHelper))
+                .environmentObject(filterHelper)
+            //FilterView()
+            //DeliveringOrderView()
                 //.environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

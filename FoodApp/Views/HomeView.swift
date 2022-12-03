@@ -10,6 +10,7 @@ import MapKit
 struct HomeView: View {
     let orangeColor = Color(red: 0.968, green: 0.546, blue: 0.461)
     @EnvironmentObject var locationHelper : LocationHelper
+    //@EnvironmentObject var filterHelper : FilterHelper
     @State var searchResturant : String = ""
     @State var orderMethod : OrderMethod = .Delivery
     @State var deleveryBtnIsDisabled : Bool = true
@@ -44,22 +45,11 @@ struct HomeView: View {
                         }.disabled(self.pickupBtnIsDisabled)
                     )// End of Rectangle
             }// End of HStack
-            Button(action: {
-                self.selected = 1
-            }){
-                HStack{
-                    Text("Now · Current Location").foregroundColor(.black)
-                    Image(systemName: "arrowtriangle.down.fill").foregroundColor(.black)
-                }
-                .onTapGesture {
-                    self.isShowingCart.toggle()
-                }
-                .sheet(isPresented: $isShowingCart){
-                    LocationDetailsView()
-                }
-            }// End of Button
+
             if(orderMethod == .Delivery){
-                DeliveryView(orderMethod: self.orderMethod, deleveryBtnIsDisabled: self.deleveryBtnIsDisabled, pickupBtnIsDisabled: self.pickupBtnIsDisabled).environmentObject(self.locationHelper)
+                DeliveryView(orderMethod: self.orderMethod, deleveryBtnIsDisabled: self.deleveryBtnIsDisabled, pickupBtnIsDisabled: self.pickupBtnIsDisabled)
+                    .environmentObject(self.locationHelper)
+                    //.environmentObject(self.filterHelper)
             }else{
                 PickUpView().environmentObject(self.resturantHelper)
             }
@@ -77,3 +67,19 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
     }
 }
+
+
+//Button(action: {
+//    self.selected = 1
+//}){
+//    HStack{
+//        Text("Now · Current Location").foregroundColor(.black)
+//        Image(systemName: "arrowtriangle.down.fill").foregroundColor(.black)
+//    }
+//    .onTapGesture {
+//        self.isShowingCart.toggle()
+//    }
+//    .sheet(isPresented: $isShowingCart){
+//        LocationDetailsView()
+//    }
+//}// End of Button

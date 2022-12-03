@@ -9,4 +9,5 @@ target 'FoodApp' do
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'FirebaseFirestoreSwift'
+  pod 'GoogleMaps'
 end
