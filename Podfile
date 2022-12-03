@@ -6,6 +6,7 @@ target 'FoodApp' do
   use_frameworks!
 
   # Pods for FoodApp
+  pod 'Firebase'
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'FirebaseFirestoreSwift'

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C68D8ED2939C2C500866BBF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C68D8EC2939C2C500866BBF /* LoginView.swift */; };
 		2D0402A528F50E0E00F2835F /* FoodAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0402A428F50E0E00F2835F /* FoodAppApp.swift */; };
 		2D0402A728F50E0E00F2835F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0402A628F50E0E00F2835F /* ContentView.swift */; };
 		2D0402A928F50E1100F2835F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0402A828F50E1100F2835F /* Assets.xcassets */; };
@@ -33,8 +34,6 @@
 		2DD0CBCD290DD1D5003C1C23 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD0CBCC290DD1D5003C1C23 /* LocationHelper.swift */; };
 		2DE39B8828F5DE3600F60A4B /* CartOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE39B8728F5DE3600F60A4B /* CartOrderView.swift */; };
 		2DF0374428FD03790042D80A /* OrderMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF0374328FD03790042D80A /* OrderMethod.swift */; };
-		5C082CA22922C06F0041931E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C082CA12922C06F0041931E /* User.swift */; };
-		5C082CA42922C5BE0041931E /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C082CA32922C5BD0041931E /* Order.swift */; };
 		5C2E44482933D2FA008306C7 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2E44472933D2FA008306C7 /* Order.swift */; };
 		5C2E444A2933D328008306C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2E44492933D328008306C7 /* User.swift */; };
 		8B39466CDD414D4685B1CBB3 /* Pods_FoodApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64BC214EB1E97BD21E07EE8 /* Pods_FoodApp.framework */; };
@@ -42,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		064594F233B522F00E067EA3 /* Pods-FoodApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodApp.debug.xcconfig"; path = "Target Support Files/Pods-FoodApp/Pods-FoodApp.debug.xcconfig"; sourceTree = "<group>"; };
+		1C68D8EC2939C2C500866BBF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2D0402A128F50E0E00F2835F /* FoodApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D0402A428F50E0E00F2835F /* FoodAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAppApp.swift; sourceTree = "<group>"; };
 		2D0402A628F50E0E00F2835F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -171,6 +171,7 @@
 				2DC0F4CB2908495900DD2A52 /* SlideOverView.swift */,
 				2DC636962909F84600D5756C /* LocationDetailsView.swift */,
 				2D44107B29158DBA00AA19D0 /* CustomMapView.swift */,
+				1C68D8EC2939C2C500866BBF /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -319,7 +320,6 @@
 				2D2089C92906F07A007FEF72 /* SearchBar.swift in Sources */,
 				2D0402C228F514F100F2835F /* BrowseView.swift in Sources */,
 				2D667DBB28F905590022392D /* ResturantView.swift in Sources */,
-				5C082CA42922C5BE0041931E /* Order.swift in Sources */,
 				2DD0CBCD290DD1D5003C1C23 /* LocationHelper.swift in Sources */,
 				5C2E444A2933D328008306C7 /* User.swift in Sources */,
 				2D0402BE28F514BA00F2835F /* AccountView.swift in Sources */,
@@ -327,6 +327,7 @@
 				2D2089CB2907345C007FEF72 /* PickUpView.swift in Sources */,
 				2D0402AE28F50E1100F2835F /* Persistence.swift in Sources */,
 				2D0402B128F50E1100F2835F /* FoodApp.xcdatamodeld in Sources */,
+				1C68D8ED2939C2C500866BBF /* LoginView.swift in Sources */,
 				5C2E44482933D2FA008306C7 /* Order.swift in Sources */,
 				2D0402A728F50E0E00F2835F /* ContentView.swift in Sources */,
 				2D2089D1290747DD007FEF72 /* CardSlider.swift in Sources */,
@@ -342,7 +343,6 @@
 				2D0402A528F50E0E00F2835F /* FoodAppApp.swift in Sources */,
 				2D2089CD290737F3007FEF72 /* DeliveryView.swift in Sources */,
 				2D0402C428F5150200F2835F /* OrdersView.swift in Sources */,
-				5C082CA22922C06F0041931E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
