@@ -6,31 +6,140 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+
+class AppViewModel: ObservableObject {
+    
+    let auth = Auth.auth()
+    
+    @Published var signedIn = false
+    
+    var isSignedIn: Bool{
+        return auth.currentUser != nil
+    }
+    
+    func signIn(email: String, password: String) {
+        auth.signIn(withEmail: email,
+                    password: password) { [weak self] result, error in
+            guard result != nil, error == nil else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.signedIn = true
+            }
+        }
+    }
+    
+    func signUp(email: String, password: String) {
+        auth.createUser(withEmail: email, password: password) {[weak self] result, error in
+            guard result != nil, error == nil else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.signedIn = true
+            }
+        }
+    }
+}
+
+struct startView: View {
+    @EnvironmentObject var loginModel: AppViewModel
+    
+    var body: some View{
+        NavigationView{
+            if loginModel.signedIn {
+                ContentView()
+            }
+            else {
+                LoginView()
+            }
+        }
+        .onAppear {
+            loginModel.signedIn = loginModel.isSignedIn
+        }
+    }
+}
 
 struct LoginView: View {
     @State var email = ""
     @State var password = ""
     
+    @EnvironmentObject var loginModel: AppViewModel
+    
     var body: some View {
         NavigationView {
             VStack {
                 TextField("Email Address", text: $email)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                     .background(Color(.secondarySystemBackground))
                     .padding()
                 SecureField("Password", text: $password)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                     .background(Color(.secondarySystemBackground))
                     .padding()
                 
                 Button(action: {
+                    
+                    guard !email.isEmpty, !password.isEmpty else {
+                        return
+                    }
+                    
+                    loginModel.signIn(email: email, password: password)
                     
                 }, label: {
                     Text("Log In")
                         .frame(width:200, height:50)
                         .cornerRadius(8)
                 })
+                
+                NavigationLink("Sign Up", destination: SignupView())
             }
-            .navigationTitle("Log In")
         }
+        .navigationTitle("Log In")
+    }
+}
+
+struct SignupView: View {
+    @State var email = ""
+    @State var password = ""
+    
+    @EnvironmentObject var loginModel: AppViewModel
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                TextField("Email Address", text: $email)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .background(Color(.secondarySystemBackground))
+                    .padding()
+                SecureField("Password", text: $password)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .background(Color(.secondarySystemBackground))
+                    .padding()
+                
+                Button(action: {
+                    
+                    guard !email.isEmpty, !password.isEmpty else {
+                        return
+                    }
+                    
+                    loginModel.signUp(email: email, password: password)
+                    
+                }, label: {
+                    Text("Create Account")
+                        .frame(width:200, height:50)
+                        .cornerRadius(8)
+                })
+            }
+            
+        }
+        .navigationTitle("Create Account")
     }
 }
 

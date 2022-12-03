@@ -18,9 +18,12 @@ struct FoodAppApp: App {
     var body: some Scene {
         WindowGroup {
             //SearchBar()
-            ContentView()
-                .environmentObject(locationhelper)
-                //.environment(\.managedObjectContext, persistenceController.container.viewContext)
+            //ContentView()
+            //  .environmentObject(locationhelper)
+            //.environment(\.managedObjectContext, persistenceController.container.viewContext)
+            let loginModel = AppViewModel()
+            startView()
+                .environmentObject(loginModel)
         }
     }
 }
