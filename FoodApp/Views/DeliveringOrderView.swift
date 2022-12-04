@@ -16,7 +16,6 @@ struct DeliveringOrderView: View {
             ZStack(alignment:.top){
                 DeliveringMapView()
                 SlideOverView(isFullyExtended: self.$isFullyExtended){
-                    
                     VStack(alignment:.leading,spacing: 30){
                         HStack(spacing: 30){
                             ZStack{
@@ -64,7 +63,6 @@ struct DeliveringOrderView: View {
                                 Text("McFlurry")
                             }
                         }
-                        
                         Spacer()
                     }
                     }.frame(maxWidth: UIScreen.main.bounds.width)

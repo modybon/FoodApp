@@ -32,6 +32,8 @@
 		2D667DBB28F905590022392D /* ResturantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D667DBA28F905590022392D /* ResturantView.swift */; };
 		2D8185462933E8EE00CB73F8 /* DietryOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8185452933E8EE00CB73F8 /* DietryOptions.swift */; };
 		2D8185482934416C00CB73F8 /* FilterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8185472934416C00CB73F8 /* FilterHelper.swift */; };
+		2D97FE86293C05690041A6AC /* PickUpOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D97FE85293C05690041A6AC /* PickUpOrderView.swift */; };
+		2D97FE8C293C0C740041A6AC /* PickUpOrderMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D97FE8B293C0C740041A6AC /* PickUpOrderMap.swift */; };
 		2DC0F4CC2908495900DD2A52 /* SlideOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC0F4CB2908495900DD2A52 /* SlideOverView.swift */; };
 		2DC20FC1292FEBB800633238 /* DeliveringOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC20FC0292FEBB800633238 /* DeliveringOrderView.swift */; };
 		2DC20FC3292FED5300633238 /* DeliveringMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC20FC2292FED5300633238 /* DeliveringMapView.swift */; };
@@ -70,6 +72,8 @@
 		2D667DBA28F905590022392D /* ResturantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturantView.swift; sourceTree = "<group>"; };
 		2D8185452933E8EE00CB73F8 /* DietryOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietryOptions.swift; sourceTree = "<group>"; };
 		2D8185472934416C00CB73F8 /* FilterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterHelper.swift; sourceTree = "<group>"; };
+		2D97FE85293C05690041A6AC /* PickUpOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpOrderView.swift; sourceTree = "<group>"; };
+		2D97FE8B293C0C740041A6AC /* PickUpOrderMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpOrderMap.swift; sourceTree = "<group>"; };
 		2DC0F4CB2908495900DD2A52 /* SlideOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOverView.swift; sourceTree = "<group>"; };
 		2DC20FC0292FEBB800633238 /* DeliveringOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveringOrderView.swift; sourceTree = "<group>"; };
 		2DC20FC2292FED5300633238 /* DeliveringMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveringMapView.swift; sourceTree = "<group>"; };
@@ -178,6 +182,8 @@
 				2DC20FC0292FEBB800633238 /* DeliveringOrderView.swift */,
 				2DC20FC2292FED5300633238 /* DeliveringMapView.swift */,
 				2D31A289293318CF0095B9DD /* FilterView.swift */,
+				2D97FE85293C05690041A6AC /* PickUpOrderView.swift */,
+				2D97FE8B293C0C740041A6AC /* PickUpOrderMap.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -333,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D2089C92906F07A007FEF72 /* SearchBar.swift in Sources */,
+				2D97FE8C293C0C740041A6AC /* PickUpOrderMap.swift in Sources */,
 				2D8185482934416C00CB73F8 /* FilterHelper.swift in Sources */,
 				2D0402C228F514F100F2835F /* BrowseView.swift in Sources */,
 				2D667DBB28F905590022392D /* ResturantView.swift in Sources */,
@@ -357,6 +364,7 @@
 				2DC0F4CC2908495900DD2A52 /* SlideOverView.swift in Sources */,
 				2D44107E2915D09400AA19D0 /* ResturantPin.swift in Sources */,
 				2DC20FC3292FED5300633238 /* DeliveringMapView.swift in Sources */,
+				2D97FE86293C05690041A6AC /* PickUpOrderView.swift in Sources */,
 				2D0402A528F50E0E00F2835F /* FoodAppApp.swift in Sources */,
 				2D2089CD290737F3007FEF72 /* DeliveryView.swift in Sources */,
 				2D0402C428F5150200F2835F /* OrdersView.swift in Sources */,

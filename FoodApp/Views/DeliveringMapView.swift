@@ -11,7 +11,7 @@ import GoogleMaps
 struct DeliveringMapView: View {
     @State var stepsCoordinates : [CLLocationCoordinate2D] = [CLLocationCoordinate2D]()
     init(){
-        GMSServices.provideAPIKey("AIzaSyB_VL6NXgkRjdDiHC00ULY2u16GPwkF7bM")
+//        GMSServices.provideAPIKey("AIzaSyB_VL6NXgkRjdDiHC00ULY2u16GPwkF7bM")
     }
     var body: some View {
         MapView(stepsCoordinates: $stepsCoordinates)
