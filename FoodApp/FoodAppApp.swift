@@ -24,6 +24,7 @@ struct FoodAppApp: App {
             let loginModel = AppViewModel()
             startView()
                 .environmentObject(loginModel)
+                .environmentObject(locationhelper)
         }
     }
 }
