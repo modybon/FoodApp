@@ -15,7 +15,7 @@ struct FoodAppApp: App {
     
     //let persistenceController = PersistenceController.shared
     
-    let locationhelper : LocationHelper = LocationHelper()
+    let locationhelper : LocationHelper = LocationHelper(filterHelper: FilterHelper())
     var body: some Scene {
         WindowGroup {
             //SearchBar()
