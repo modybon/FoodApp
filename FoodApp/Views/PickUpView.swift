@@ -21,42 +21,14 @@ struct PickUpView: View {
     @EnvironmentObject var locationHelper : LocationHelper
     @State var currentLatitude : Double = 0
     @State var currentLongitude : Double = 0
-    @EnvironmentObject var resturantHelper : ResturantHelper 
+    @EnvironmentObject var resturantHelper : ResturantHelper
     var body: some View {
-        let resturants : [ResturantPin] = [
-            ResturantPin(name: "MacDonalds", location:CLLocationCoordinate2D(latitude: 37.714334 - 0.0002123123 , longitude: -122.408227 - 0.00123123123 ), rating: 4.3),
-            ResturantPin(name: "Burger King", location:CLLocationCoordinate2D(latitude: 37.714334 - 0.000219723492 , longitude: -122.408227 - 0.0017623452 ), rating: 3.9),
-            ResturantPin(name: "Pizza Dominos", location:CLLocationCoordinate2D(latitude: 37.714334 - 0.000523423 , longitude: -122.408227 - 0.0012342342 ), rating: 5.0),
-            ResturantPin(name: "Paradise Chicken", location:CLLocationCoordinate2D(latitude: 37.714334 - 0.000264533 , longitude: -122.408227 - 0.0012921638721 ), rating: 4.7)
-        ]
         VStack{
-            switch self.locationHelper.authorizationStatus {
-            case .notDetermined:
-                Text("Not Determined").onAppear{
-                    locationHelper.requestPermission()
-                }
-            case .restricted:
-                Text("Restricted")
-            case .denied:
-                Text("Denied").onAppear{
-                    locationHelper.requestPermission()
-                }
-            case .authorized:
-                Text("Authorized")
-            case .authorizedAlways:
-                Text("Alway Authorized")
-            case .authorizedWhenInUse:
-                Text("")
-            @unknown default:
-                fatalError()
-            }
             ZStack(alignment: .bottom){
                 Text("\(self.currentLongitude)")
                 Text("\(self.currentLatitude)")
                 ZStack(alignment:.topLeading){
-                    
                     CustomMapView().environmentObject(self.resturantHelper)
-                    
                     ZStack{
                         Rectangle()
                             .foregroundColor((slideOverIsExpanded) ? .white : .clear)
@@ -68,7 +40,6 @@ struct PickUpView: View {
                     VStack{
                         Text("Lattitude: \(locationHelper.currentLocation?.coordinate.latitude ?? 0)")
                         Text("Longitude: \(locationHelper.currentLocation?.coordinate.longitude ?? 0)")
-                        Text("Resturant Name: \(self.$resturantHelper.currentResturantMapItem.wrappedValue?.name ?? "NA")")
                         ScrollView(.horizontal){
                             LazyHStack(spacing:50){
                                 VStack{
@@ -117,15 +88,26 @@ struct PickUpView: View {
                                 
                             }.padding()
                         }.frame(maxWidth: UIScreen.main.bounds.width,maxHeight: 80)
-                        List{
-                            ResturantView(resturantName: "mac").listRowSeparator(.hidden)
-                            ResturantView(resturantName: "mac")
-                            ResturantView(resturantName: "mac")
-                        }.listStyle(.grouped)
+                        if(!self.$locationHelper.resturantsList.isEmpty){
+                            List{
+                                ForEach(self.$locationHelper.resturantsList){ resturant in
+                                    ResturantView(resturant: resturant.wrappedValue,isDelivery: false)
+                                }
+                            }.listStyle(.grouped)
+                        }else{
+                            Text("NO RESTURANTS NEAR BY 😢")
+                        }
                     }
                 }
-            }
+            }// End of Zstack
             //Spacer()
+        }// End of Vstack
+    }
+    var searchResults: [Resturant] {
+        if searchText.isEmpty {
+            return [Resturant]()
+        } else {
+            return self.locationHelper.resturantsList.filter { $0.name.contains(self.searchText)}
         }
     }
 }

@@ -46,7 +46,7 @@ class AppViewModel: ObservableObject {
 
 struct startView: View {
     @EnvironmentObject var loginModel: AppViewModel
-    
+    @EnvironmentObject var locationHelper : LocationHelper
     var body: some View{
         NavigationView{
             if loginModel.signedIn {

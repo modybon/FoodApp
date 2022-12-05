@@ -17,12 +17,13 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
     @Published var region : MKCoordinateRegion = MKCoordinateRegion()
     private let locationManager : CLLocationManager
     @Published var resturantsList : [Resturant] = [Resturant]()
-    
+    var filterHelper : FilterHelper
     //The location manager’s delegate informs the app when new locations arrive and when the privacy setting changes.
     
-    override init() {
+    init(filterHelper: FilterHelper) {
         locationManager = CLLocationManager()
         authorizationStatus = locationManager.authorizationStatus
+        self.filterHelper = filterHelper
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -36,6 +37,70 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         authorizationStatus = manager.authorizationStatus
+        switch authorizationStatus {
+        case .notDetermined:
+            requestPermission()
+        case .restricted , .denied:
+            requestPermission()
+        case .authorizedAlways, .authorizedWhenInUse:
+            break
+        @unknown default:
+            fatalError()
+        }
+    }
+    
+    func preformResturantsSearch(){
+        self.resturantsList.removeAll()
+        let searchRequest = MKLocalSearch.Request()
+        print(#function,"\(self.region)")
+        searchRequest.region = self.region
+        searchRequest.naturalLanguageQuery = self.filterHelper.dietOptions
+        let search = MKLocalSearch(request: searchRequest)
+        search.start(){ [self] response, error in
+            guard let response = response else{
+                print(#function, "response is null \(error!)")
+                return
+            }
+            for item in response.mapItems{
+                let resturant = Resturant()
+                resturant.name = item.name!
+                resturant.phoneNumber = item.phoneNumber ?? "NA"
+                
+                let p1 = MKPlacemark(coordinate: currentLocation!.coordinate)
+                let p2 = MKPlacemark(coordinate: item.placemark.coordinate)
+
+                let request = MKDirections.Request()
+                request.source = MKMapItem(placemark: p1)
+                request.destination = MKMapItem(placemark: p2)
+                request.transportType = .walking
+
+                let direction = MKDirections(request: request)
+
+                direction.calculate(){ response , error in
+                    guard let route = response?.routes.first else{return}
+                    resturant.distanceFromCL = Float(route.distance) / 1000
+                    print(#function, "Name: \(resturant.name) Distance: \(resturant.distanceFromCL), Time: \(route.expectedTravelTime / 60)")
+                    resturant.approxWalkTime = Float((route.expectedTravelTime / 60))
+                }
+                
+                let request2 = MKDirections.Request()
+                request2.source = MKMapItem(placemark: p1)
+                request2.destination = MKMapItem(placemark: p2)
+                request2.transportType = .walking
+
+                let direction2 = MKDirections(request: request2)
+
+                direction2.calculate(){ response , error in
+                    guard let route = response?.routes.first else{return}
+                    print(#function, "Delivery Time: \(route.expectedTravelTime / 60)")
+                    resturant.approxDeliveryTime = Float((route.expectedTravelTime / 60))
+                    resturant.deliveryFee = (0 < resturant.distanceFromCL && resturant.distanceFromCL < 0.5) ? 2.99 : (resturant.distanceFromCL < 1) ? 3.99 : 4.99
+                }
+                if(resturant.deliveryFee <= self.filterHelper.maxDeliveryFee){
+                    self.resturantsList.append(resturant)
+                }
+            }
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -52,25 +117,7 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
                     latitudeDelta: 0.01,
                     longitudeDelta: 0.01) // Controls the zoom of map
             )
-            self.resturantsList.removeAll()
-            let searchRequest = MKLocalSearch.Request()
-            print(#function,"\(self.region)")
-            searchRequest.region = self.region
-            searchRequest.naturalLanguageQuery = "food"
-            let search = MKLocalSearch(request: searchRequest)
-            search.start(){ response, error in
-                guard let response = response else{
-                    print(#function, "response is null \(error)")
-                    return
-                }
-                for item in response.mapItems{
-                    let resturant = Resturant()
-                    resturant.name = item.name!
-                    resturant.phoneNumber = item.phoneNumber ?? "NA"
-                    self.resturantsList.append(resturant)
-                    print(#function," ON APPEAR: \(item.name): \nUrl:\(item.url)\nPhone Number: \(item.phoneNumber)")
-                }
-            }
+            preformResturantsSearch()
         }else{
             // you will get location.first: Last know location by phone
             self.lastSeenLocation = locations.first
@@ -82,6 +129,7 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
                     latitudeDelta: 0.01,
                     longitudeDelta: 0.01) // Controls the zoom of map
             )
+            preformResturantsSearch()
         }
         
         
@@ -90,9 +138,9 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
     }
     
     func fetchCurrentLocation(for location: CLLocation?){
-        guard let location = location else {return}
-        print(#function, "\(location)")
-        let geoCoder = CLGeocoder()
+//        guard let location = location else {return}
+//        print(#function, "\(location)")
+//        let geoCoder = CLGeocoder()
 //        geoCoder.reverseGeocodeLocation(location){ placemarks, error in
 //            self.currentLocation = placemarks?.first
 //        }
@@ -111,6 +159,6 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
 //        mapAnnotation.title = "Macdonalds"
 //
 //        mapView.addAnnotation(mapAnnotation)
-//        //mapView.addAnnotation(annotationView as! MKAnnotation)
+        //mapView.addAnnotation(annotationView as! MKAnnotation)
 //    }
 }

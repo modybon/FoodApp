@@ -14,7 +14,7 @@ struct FoodAppApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     //let persistenceController = PersistenceController.shared
-    let locationhelper : LocationHelper = LocationHelper()
+    //let locationhelper : LocationHelper = LocationHelper(filterHelper: <#FilterHelper#>)
     var body: some Scene {
         WindowGroup {
             //SearchBar()
@@ -24,7 +24,7 @@ struct FoodAppApp: App {
             let loginModel = AppViewModel()
             startView()
                 .environmentObject(loginModel)
-                .environmentObject(locationhelper)
+                .environmentObject(LocationHelper(filterHelper: FilterHelper()))
         }
     }
 }
