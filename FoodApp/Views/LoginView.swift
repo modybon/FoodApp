@@ -11,6 +11,7 @@ import FirebaseAuth
 class AppViewModel: ObservableObject {
     
     let auth = Auth.auth()
+ 
     
     @Published var signedIn = false
     
@@ -104,14 +105,27 @@ struct LoginView: View {
 }
 
 struct SignupView: View {
+    @State var uName = ""
+    @State var uPhone = ""
     @State var email = ""
     @State var password = ""
     
     @EnvironmentObject var loginModel: AppViewModel
+    @EnvironmentObject var fireDBHelper : FireDBHelper
     
     var body: some View {
         NavigationView {
             VStack {
+                TextField("Full Name", text: $uName)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .background(Color(.secondarySystemBackground))
+                    .padding()
+                TextField("Phone Number", text: $uPhone)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .background(Color(.secondarySystemBackground))
+                    .padding()
                 TextField("Email Address", text: $email)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
@@ -125,11 +139,13 @@ struct SignupView: View {
                 
                 Button(action: {
                     
-                    guard !email.isEmpty, !password.isEmpty else {
+                    guard !email.isEmpty, !password.isEmpty, !uName.isEmpty, !uPhone.isEmpty  else {
                         return
                     }
-                    
+                   
                     loginModel.signUp(email: email, password: password)
+                   
+                    
                     
                 }, label: {
                     Text("Create Account")
@@ -140,6 +156,10 @@ struct SignupView: View {
             
         }
         .navigationTitle("Create Account")
+        .onDisappear(){
+            var insertUser = User(id: String(loginModel.auth.currentUser!.uid),uName: uName, email: email, phone: uPhone, favRes: [""], savedAddresses: [""])
+            self.fireDBHelper.insertUser(newUser: insertUser)
+        }
     }
 }
 

@@ -10,27 +10,23 @@ import FirebaseAuth
 
 struct AccountView: View {
     
-    @EnvironmentObject var user: User
+    @EnvironmentObject var fireDBHelper: FireDBHelper
     @EnvironmentObject var loginModel: AppViewModel
-    
     let auth = Auth.auth()
     
     var body: some View {
         NavigationView{
-//            Section{
-//                Text("My Account").fontWeight(.bold)
-//            }
-            List{
+             List{
             VStack{
                 HStack{
-                    Text("Name: ")
+                    Text("Welcome : ").font(.headline)
                     Spacer()
-                   // Text(user.userName)
+ //                   Text((self.fireDBHelper.user.userName) ?? "ASB")
                 }
                 HStack{
                     Text("Email: ")
                     Spacer()
-                  //  Text(user.email)
+   //                 Text(self.fireDBHelper.user.email!)
                 }
                 HStack{
                     Text("Saved Addresses: ")
@@ -46,6 +42,8 @@ struct AccountView: View {
                 }
             }
            
+        }.onAppear(){
+            self.fireDBHelper.getUserDetails(userID: auth.currentUser?.uid)
         }
     }
 }

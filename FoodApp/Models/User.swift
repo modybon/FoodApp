@@ -6,23 +6,57 @@
 //
 
 import Foundation
-class User: Identifiable, ObservableObject{
-    var id: UUID
-    var userName: String
-    var password: String
-    var email: String
-    var phone: Int
-    var favRestaurants: [String]
-    var savedAddresses: [String]
+import FirebaseFirestoreSwift
+
+struct User: Codable,Hashable{
+    var id: String?
+    var userName: String?
+    var email: String?
+    var phone: String?
+    var favRestaurants: [String]?
+    var savedAddresses: [String]?
     
-    init(uName: String, pass: String, email: String, phone: Int, favRes: [String], savedAddresses: [String]){
-        self.id = UUID()
+    init(){
+        
+    }
+    init(id: String,uName: String, email: String, phone: String, favRes: [String], savedAddresses: [String]){
+        self.id = id
         self.userName = uName
         self.email = email
-        self.password = pass
         self.phone = phone
         self.favRestaurants = favRes
         self.savedAddresses = savedAddresses
+    }
+    
+    //Failable initializer
+     init?(dictionary: [String: Any]){
+        
+         guard let id = dictionary["id"] as? String else{
+             return nil
+         }
+         
+        guard let username = dictionary["userName"] as? String else{
+            return nil
+        }
+        
+        guard let email = dictionary["email"] as? String else{
+            return nil
+        }
+        
+        guard let phone = dictionary["phone"] as? String else{
+            return nil
+        }
+        
+        guard let favRest = dictionary["favRestaurants"] as? [String] else{
+            return nil
+        }
+        
+        guard let savedAdd = dictionary["savedAddresses"] as? [String] else{
+            return nil
+        }
+        
+         self.init(id: id,uName: username, email: email, phone: phone, favRes: favRest, savedAddresses: savedAdd)
+        
     }
     
 }

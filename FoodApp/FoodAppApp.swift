@@ -14,6 +14,7 @@ struct FoodAppApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     //let persistenceController = PersistenceController.shared
+    
     let locationhelper : LocationHelper = LocationHelper()
     var body: some Scene {
         WindowGroup {
@@ -22,9 +23,11 @@ struct FoodAppApp: App {
             //  .environmentObject(locationhelper)
             //.environment(\.managedObjectContext, persistenceController.container.viewContext)
             let loginModel = AppViewModel()
+            let fireDBHelper = FireDBHelper(database: Firestore.firestore())
             startView()
                 .environmentObject(loginModel)
                 .environmentObject(locationhelper)
+                .environmentObject(fireDBHelper)
         }
     }
 }
