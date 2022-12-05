@@ -10,7 +10,8 @@ import SwiftUI
 struct ResturantView: View {
     // TODO: if its being used in pickup view it will also show distance from the user location
     @State var isFavourite : Bool = false
-    var resturantName : String
+    var resturant : Resturant
+    var isDelivery : Bool
     var body: some View {
         let heartImage : String = (self.isFavourite) ?  "heart.fill" : "heart"
         VStack(alignment:.leading){
@@ -27,8 +28,17 @@ struct ResturantView: View {
             }
             HStack{
                 VStack(alignment:.leading){
-                    Text("\(self.resturantName)")
-                    Text("$0.99 Delivery Fee 20-35 min")
+                    Text("\(self.resturant.name)")
+                    HStack{
+                        if(isDelivery){
+                            Text("$\(String(format:"%.2f",resturant.deliveryFee)) Delivery Fee")
+                            Text("\(String(format:"%.f",((resturant.approxDeliveryTime)))) - \((String(format:"%.f",resturant.approxDeliveryTime + 5))) mins")
+                        }else{
+                            Text("10-15 mins")
+                            Text("\(String(format:"%.1f",resturant.distanceFromCL)) Km")
+                        }
+                        
+                    }
                 }
                 Spacer()
                 Circle()
@@ -38,7 +48,6 @@ struct ResturantView: View {
                     .overlay{
                         Text("4.6")
                     }
-                    
             }
         }
         .padding()
@@ -47,8 +56,9 @@ struct ResturantView: View {
     }
 }
 
-struct ResturantView_Previews: PreviewProvider {
-    static var previews: some View {
-        ResturantView(resturantName: "Mac")
-    }
-}
+//struct ResturantView_Previews: PreviewProvider {
+//    @State var resturant : Resturant = Resturant()
+//    static var previews: some View {
+//        ResturantView(resturant: resturant)
+//    }
+//}
