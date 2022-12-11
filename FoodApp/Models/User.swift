@@ -13,18 +13,18 @@ struct User: Codable,Hashable{
     var userName: String?
     var email: String?
     var phone: String?
-    var favRestaurants: [String]?
+//    var favRestaurants: [String]?
     var savedAddresses: [String]?
     
     init(){
         
     }
-    init(id: String,uName: String, email: String, phone: String, favRes: [String], savedAddresses: [String]){
+    init(id: String,uName: String, email: String, phone: String, savedAddresses: [String]){
         self.id = id
         self.userName = uName
         self.email = email
         self.phone = phone
-        self.favRestaurants = favRes
+//        self.favRestaurants = favRes
         self.savedAddresses = savedAddresses
     }
     
@@ -47,15 +47,15 @@ struct User: Codable,Hashable{
             return nil
         }
         
-        guard let favRest = dictionary["favRestaurants"] as? [String] else{
-            return nil
-        }
+//        guard let favRest = dictionary["favRestaurants"] as? [String] else{
+//            return nil
+//        }
         
         guard let savedAdd = dictionary["savedAddresses"] as? [String] else{
             return nil
         }
         
-         self.init(id: id,uName: username, email: email, phone: phone, favRes: favRest, savedAddresses: savedAdd)
+         self.init(id: id,uName: username, email: email, phone: phone, savedAddresses: savedAdd)
         
     }
     

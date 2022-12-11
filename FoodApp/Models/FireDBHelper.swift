@@ -35,7 +35,7 @@ class FireDBHelper : ObservableObject{
     func insertUser(newUser : User){
         
         do{
-            try self.store.collection(COLLECTION_NAME).addDocument(from: newUser)
+            try self.store.collection(COLLECTION_NAME).document(newUser.id!).setData(from: newUser)
             
         }catch let error as NSError{
             print(#function, "Error while inserting document on firestore \(error)")
@@ -56,8 +56,8 @@ class FireDBHelper : ObservableObject{
                         let phone = data["phone"] as? String ?? ""
                         let email = data["email"] as? String ?? ""
                         let savedAddresses = data["savedAddresses"] as? [String] ?? [""]
-                        let favRestaurants = data["favRestaurants"] as? [String] ?? [""]
-                        self.user = User(id: userID!, uName: name, email: email, phone: phone, favRes: favRestaurants, savedAddresses: savedAddresses)
+                     //   let favRestaurants = data["favRestaurants"] as? [String] ?? [""]
+                        self.user = User(id: userID!, uName: name, email: email, phone: phone, savedAddresses: savedAddresses)
                      }
                 }
         }
@@ -87,6 +87,28 @@ class FireDBHelper : ObservableObject{
             }
     }
     
+    
+    func updateUserRes(addRes: Resturant, addorDel: Bool){
+        if(addorDel){
+        do{
+            try self.store.collection(COLLECTION_NAME).document(self.user.id!).collection("favRestaurants").document(addRes.name).setData(from: addRes, merge: true)
+            
+        }catch let error as NSError{
+            print(#function, "Error while inserting document on firestore \(error)")
+        }
+        }else{
+            self.store
+                .collection(COLLECTION_NAME)
+                .document(self.user.id!).collection("favRestaurants").document(addRes.name)
+                .delete(){error in
+                    if let err = error{
+                        print(#function, "Error while updating document \(err)")
+                    }else{
+                        print(#function, "User \(self.user.userName) updated successfully")
+                    }
+                }
+        }
+    }
     func deleteUser(userToDelete: User){
         self.store
             .collection(COLLECTION_NAME)

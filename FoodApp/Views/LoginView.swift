@@ -157,7 +157,7 @@ struct SignupView: View {
         }
         .navigationTitle("Create Account")
         .onDisappear(){
-            var insertUser = User(id: String(loginModel.auth.currentUser!.uid),uName: uName, email: email, phone: uPhone, favRes: [""], savedAddresses: [""])
+            var insertUser = User(id: String(loginModel.auth.currentUser!.uid),uName: uName, email: email, phone: uPhone, savedAddresses: [""])
             self.fireDBHelper.insertUser(newUser: insertUser)
         }
     }
