@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1C68D8ED2939C2C500866BBF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C68D8EC2939C2C500866BBF /* LoginView.swift */; };
+		1CE3A0C5294677D0006CAA1C /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE3A0C4294677D0006CAA1C /* MenuView.swift */; };
+		1CE3A0C7294685FF006CAA1C /* OrderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE3A0C6294685FF006CAA1C /* OrderHelper.swift */; };
 		2D012B44293D431D00B7B84D /* DietryOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D012B42293D431B00B7B84D /* DietryOptions.swift */; };
 		2D012B45293D431D00B7B84D /* FilterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D012B43293D431D00B7B84D /* FilterHelper.swift */; };
 		2D012B4C293D437100B7B84D /* DeliveringMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D012B47293D437000B7B84D /* DeliveringMapView.swift */; };
@@ -49,6 +51,8 @@
 /* Begin PBXFileReference section */
 		064594F233B522F00E067EA3 /* Pods-FoodApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodApp.debug.xcconfig"; path = "Target Support Files/Pods-FoodApp/Pods-FoodApp.debug.xcconfig"; sourceTree = "<group>"; };
 		1C68D8EC2939C2C500866BBF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		1CE3A0C4294677D0006CAA1C /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		1CE3A0C6294685FF006CAA1C /* OrderHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHelper.swift; sourceTree = "<group>"; };
 		2D012B42293D431B00B7B84D /* DietryOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DietryOptions.swift; sourceTree = "<group>"; };
 		2D012B43293D431D00B7B84D /* FilterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterHelper.swift; sourceTree = "<group>"; };
 		2D012B46293D436F00B7B84D /* DeliveringOrderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveringOrderView.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 				2D44107D2915D09400AA19D0 /* ResturantPin.swift */,
 				2D3CA0D6292AC90E0059B33D /* ResturantHelper.swift */,
 				5C2E44472933D2FA008306C7 /* Order.swift */,
+				1CE3A0C6294685FF006CAA1C /* OrderHelper.swift */,
 				5C2E44492933D328008306C7 /* User.swift */,
 				5C2E45DD293D325C008306C7 /* FireDBHelper.swift */,
 			);
@@ -187,6 +192,7 @@
 				2D44107B29158DBA00AA19D0 /* CustomMapView.swift */,
 				1C68D8EC2939C2C500866BBF /* LoginView.swift */,
 				5C2E45DF293E7404008306C7 /* OrderDetailsView.swift */,
+				1CE3A0C4294677D0006CAA1C /* MenuView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -339,6 +345,8 @@
 				2D0402BE28F514BA00F2835F /* AccountView.swift in Sources */,
 				2DC636972909F84700D5756C /* LocationDetailsView.swift in Sources */,
 				5C2E45DE293D325C008306C7 /* FireDBHelper.swift in Sources */,
+				1CE3A0C7294685FF006CAA1C /* OrderHelper.swift in Sources */,
+				1CE3A0C5294677D0006CAA1C /* MenuView.swift in Sources */,
 				2D0402AE28F50E1100F2835F /* Persistence.swift in Sources */,
 				2D0402B128F50E1100F2835F /* FoodApp.xcdatamodeld in Sources */,
 				2D012B57293D5F5F00B7B84D /* ResturantView.swift in Sources */,
