@@ -21,21 +21,28 @@ struct AccountView: View {
                 HStack{
                     Text("Welcome : ").font(.headline)
                     Spacer()
- //                   Text((self.fireDBHelper.user.userName) ?? "ASB")
+                    Text((self.fireDBHelper.user.userName) ?? "ASB")
                 }
                 HStack{
                     Text("Email: ")
                     Spacer()
-   //                 Text(self.fireDBHelper.user.email!)
+                    Text((self.fireDBHelper.user.email) ?? "NA")
                 }
                 HStack{
-                    Text("Saved Addresses: ")
+                    Text("No. of Saved Addresses: ")
                     Spacer()
-                    //Text(User.username)
+                    Text((String(self.fireDBHelper.user.savedAddresses?[0] ?? "0" )))
                 }
             }
                 Button(action:{
                     loginModel.signedIn = false
+                    
+                    do{
+                        try self.loginModel.auth.signOut()
+                    }catch{
+                        print(#function, "Not able to sign out!")
+                    }
+                        
                     return
                 }){
                     Text("Logout")
