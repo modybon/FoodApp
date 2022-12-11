@@ -28,7 +28,6 @@
 		2D0402BB28F5149600F2835F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0402BA28F5149600F2835F /* HomeView.swift */; };
 		2D0402BE28F514BA00F2835F /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0402BD28F514BA00F2835F /* AccountView.swift */; };
 		2D0402C028F514DA00F2835F /* BasketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0402BF28F514DA00F2835F /* BasketView.swift */; };
-		2D0402C228F514F100F2835F /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0402C128F514F100F2835F /* BrowseView.swift */; };
 		2D0402C428F5150200F2835F /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0402C328F5150200F2835F /* OrdersView.swift */; };
 		2D0402C828F518BA00F2835F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D0402C728F518BA00F2835F /* GoogleService-Info.plist */; };
 		2D2089C92906F07A007FEF72 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2089C82906F07A007FEF72 /* SearchBar.swift */; };
@@ -72,7 +71,6 @@
 		2D0402BA28F5149600F2835F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2D0402BD28F514BA00F2835F /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		2D0402BF28F514DA00F2835F /* BasketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketView.swift; sourceTree = "<group>"; };
-		2D0402C128F514F100F2835F /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
 		2D0402C328F5150200F2835F /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
 		2D0402C728F518BA00F2835F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D2089C82906F07A007FEF72 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -180,7 +178,6 @@
 				2D0402BA28F5149600F2835F /* HomeView.swift */,
 				2D0402BD28F514BA00F2835F /* AccountView.swift */,
 				2D0402BF28F514DA00F2835F /* BasketView.swift */,
-				2D0402C128F514F100F2835F /* BrowseView.swift */,
 				2D0402C328F5150200F2835F /* OrdersView.swift */,
 				2DE39B8728F5DE3600F60A4B /* CartOrderView.swift */,
 				2D2089C82906F07A007FEF72 /* SearchBar.swift */,
@@ -338,7 +335,6 @@
 				2D2089C92906F07A007FEF72 /* SearchBar.swift in Sources */,
 				2D012B59293D5F9200B7B84D /* PickUpView.swift in Sources */,
 				2D012B4D293D437100B7B84D /* PickUpOrderMap.swift in Sources */,
-				2D0402C228F514F100F2835F /* BrowseView.swift in Sources */,
 				5C2E444A2933D328008306C7 /* User.swift in Sources */,
 				2D0402BE28F514BA00F2835F /* AccountView.swift in Sources */,
 				2DC636972909F84700D5756C /* LocationDetailsView.swift in Sources */,

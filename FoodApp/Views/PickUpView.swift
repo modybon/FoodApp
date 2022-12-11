@@ -38,8 +38,6 @@ struct PickUpView: View {
                 }
                 SlideOverView(isFullyExtended: self.$slideOverIsExpanded){
                     VStack{
-                        Text("Lattitude: \(locationHelper.currentLocation?.coordinate.latitude ?? 0)")
-                        Text("Longitude: \(locationHelper.currentLocation?.coordinate.longitude ?? 0)")
                         ScrollView(.horizontal){
                             LazyHStack(spacing:50){
                                 VStack{

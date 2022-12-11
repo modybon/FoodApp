@@ -16,10 +16,7 @@ struct ContentView: View {
                 Image(systemName: "house.fill")
                 Text("Home")
             }.environmentObject(locationHelper)
-            BrowseView().tabItem{
-                Image(systemName: "magnifyingglass")
-                Text("Browse")
-            }
+
             BasketView().tabItem{
                 Image(systemName: "cart.fill")
                 Text("Baskets")
