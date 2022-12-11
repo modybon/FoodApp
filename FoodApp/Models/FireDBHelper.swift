@@ -43,13 +43,14 @@ class FireDBHelper : ObservableObject{
     }
     
     func getUserDetails(userID: String?){
-        self.store.collection("Users").whereField("id", isEqualTo: userID)
+        print(#function, "user id got is ****: \(userID)")
+        self.store.collection("Users").whereField("id", isEqualTo: String(userID!))
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
+                        print("You are here: \(document.documentID) => \(document.data())")
                         let data = document.data()
                         let name = data["userName"] as? String ?? ""
                         let phone = data["phone"] as? String ?? ""

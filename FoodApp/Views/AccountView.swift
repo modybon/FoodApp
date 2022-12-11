@@ -50,7 +50,10 @@ struct AccountView: View {
             }
            
         }.onAppear(){
-            self.fireDBHelper.getUserDetails(userID: auth.currentUser?.uid)
+            DispatchQueue.main.async {
+                self.fireDBHelper.getUserDetails(userID: auth.currentUser?.uid)
+            }
+            
         }
     }
 }
