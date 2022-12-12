@@ -111,6 +111,7 @@ struct SignupView: View {
     
     @EnvironmentObject var loginModel: AppViewModel
     @EnvironmentObject var fireDBHelper : FireDBHelper
+    @EnvironmentObject var locHelper: LocationHelper
     
     var body: some View {
         NavigationView {
@@ -156,7 +157,7 @@ struct SignupView: View {
         }
         .navigationTitle("Create Account")
         .onDisappear(){
-            var insertUser = User(id: String(loginModel.auth.currentUser!.uid),uName: uName, email: email, phone: uPhone, savedAddresses: [""])
+            var insertUser = User(id: String(loginModel.auth.currentUser!.uid),uName: uName, email: email, phone: uPhone, savedAddresses: [String(self.locHelper.fetchCurrentLocation(for: (self.locHelper.currentLocation!)))])
             self.fireDBHelper.insertUser(newUser: insertUser)
         }
     }

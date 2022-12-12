@@ -135,17 +135,20 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
         }
         
         
-        fetchCurrentLocation(for: locations.first)
-        print(#function)
+//        fetchCurrentLocation(for: locations.first)
+//        print(#function)
     }
     
-    func fetchCurrentLocation(for location: CLLocation?){
-//        guard let location = location else {return}
-//        print(#function, "\(location)")
-//        let geoCoder = CLGeocoder()
-//        geoCoder.reverseGeocodeLocation(location){ placemarks, error in
-//            self.currentLocation = placemarks?.first
-//        }
+    func fetchCurrentLocation(for location: CLLocation?) -> String{
+        var result: String = ""
+//        guard let location = location else {return ""}
+  
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(location!){ placemarks, error in
+            result = placemarks?.first!.description ?? "No saved address"
+        }
+        print(#function, "\(result)")
+        return result
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(#function, "\(error.localizedDescription)")

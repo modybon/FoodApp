@@ -8,8 +8,21 @@
 import SwiftUI
 
 struct OrderDetailsView: View {
+    @EnvironmentObject var orderHelper: OrderHelper
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView{
+//            List(self.orderHelper.orderList){order in
+//                VStack(){
+//                    Text(order.item.name)
+//                        .frame(maxWidth: .infinity, alignment: .center)
+//                        .font(.title)
+//                    Text("Quantity: "+order.qty)
+//                        .multilineTextAlignment(.center)
+//                    Text("Price: "+String(order.price))
+//                        .multilineTextAlignment(.center)
+//                }
+//            }
+        }
     }
 }
 
