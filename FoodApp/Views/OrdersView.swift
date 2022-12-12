@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct OrdersView: View {
-    var arr = [1,2,3,4,5]
+    @EnvironmentObject var orderHelper : OrderHelper
     var body: some View {
         NavigationView{
             List{
                 Text("Orders").font(.system(size: 40)).fontWeight(.bold).listRowSeparator(.hidden)
-                ForEach(arr,id: \.self){ item in
-                    NavigationLink(destination: OrderDetailsView()){
-                        OrderDetailsView()
+                ForEach(orderHelper.orderList){ order in
+                    NavigationLink(destination: OrderDetailsView(orderTemp: order)){
+                        CustomListTile(orderTemp: order)
                             .onTapGesture {
-                                print("Item Tapped")
-                            }
+                                print(#function, "\(order) selected")
+                            }//TapGesture ends
+                            
+                        //CustomeListTile ends
                     }
                 }.onDelete{_ in
                     print("Item Deleted")
@@ -34,3 +36,18 @@ struct OrdersView_Previews: PreviewProvider {
         OrdersView()
     }
 }
+
+struct CustomListTile : View{
+    
+    var orderTemp : Order
+    
+    var body: some View{
+        VStack(alignment: .leading){
+            Text("\(orderTemp.restaurant.name)")
+                .fontWeight(.bold)
+            
+            Text("\(orderTemp.amountPayed)")
+        }
+    }
+}
+
