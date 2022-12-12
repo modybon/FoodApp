@@ -8,30 +8,30 @@
 import SwiftUI
 import MapKit
 struct DeliveringMapView: View {
+    var currentUserPosition : Binding<CLLocation?>
+    var resturantPosition : CLLocation
     @State var stepsCoordinates : [CLLocationCoordinate2D] = [CLLocationCoordinate2D]()
-    init(){
-//        GMSServices.provideAPIKey("AIzaSyB_VL6NXgkRjdDiHC00ULY2u16GPwkF7bM")
-    }
     var body: some View {
-        MapView(stepsCoordinates: $stepsCoordinates)
+        MapView(stepsCoordinates: $stepsCoordinates, startPosition: currentUserPosition, endPosition: resturantPosition)
     }
 }
 
 struct MapView : UIViewRepresentable{
     typealias UIViewType = MKMapView
-    private var startPosition : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 51.50998 - 0.0002123123, longitude: -0.1337 - 0.00123123123)
-    private var endPosition : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 51.50998 - 0.00021312312, longitude: -0.1337 - 0.00523234523)
+    private var startPosition : Binding<CLLocation?>
+    private var endPosition : CLLocation
     private var mapAnnotation = MKPointAnnotation()
     private var destination = MKPointAnnotation()
     var map : MKMapView = MKMapView()
     var stepsCoordinates :  Binding<[CLLocationCoordinate2D]>
-    init(stepsCoordinates: Binding<[CLLocationCoordinate2D]>){
+    init(stepsCoordinates: Binding<[CLLocationCoordinate2D]>,  startPosition : Binding<CLLocation?> , endPosition : CLLocation){
         self.stepsCoordinates = stepsCoordinates
+        self.startPosition = startPosition
+        self.endPosition = endPosition
     }
 
     func makeUIView(context: Context) -> MKMapView {
-        let sourceCodinates : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 51.50998, longitude: -0.1337)
-        let region : MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: sourceCodinates.latitude, longitude: sourceCodinates.longitude), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+        let region : MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: startPosition.wrappedValue!.coordinate.latitude, longitude: startPosition.wrappedValue!.coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
 
         map.delegate = context.coordinator
         map.isZoomEnabled = true
@@ -43,13 +43,13 @@ struct MapView : UIViewRepresentable{
         map.isRotateEnabled = true
         map.showsCompass = true
 
-        mapAnnotation.coordinate = startPosition
-        destination.coordinate = endPosition
+        mapAnnotation.coordinate = CLLocationCoordinate2D(latitude: endPosition.coordinate.latitude, longitude: endPosition.coordinate.longitude)
+        destination.coordinate = CLLocationCoordinate2D(latitude: startPosition.wrappedValue!.coordinate.latitude, longitude: startPosition.wrappedValue!.coordinate.longitude)
         destination.title = "destination"
         map.addAnnotation(mapAnnotation)
         map.addAnnotation(destination)
-        let p1 = MKPlacemark(coordinate: startPosition)
-        let p2 = MKPlacemark(coordinate: endPosition)
+        let p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: endPosition.coordinate.latitude, longitude: endPosition.coordinate.longitude))
+        let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: startPosition.wrappedValue!.coordinate.latitude, longitude: startPosition.wrappedValue!.coordinate.longitude))
 
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: p1)
@@ -109,11 +109,11 @@ struct MapView : UIViewRepresentable{
     }
 }
 
-struct DeliveringMapView_Previews: PreviewProvider {
-    static var previews: some View {
-        DeliveringMapView()
-    }
-}
+//struct DeliveringMapView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DeliveringMapView()
+//    }
+//}
 
 
 class CustomAnnotation : NSObject,MKMapViewDelegate{

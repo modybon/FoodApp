@@ -46,20 +46,6 @@ struct HomeView: View {
                         }.disabled(self.pickupBtnIsDisabled)
                     )// End of Rectangle
             }// End of HStack
-            Button(action: {
-                self.selected = 1
-            }){
-                HStack{
-                    Text("Now · Current Location").foregroundColor(.black)
-                    Image(systemName: "arrowtriangle.down.fill").foregroundColor(.black)
-                }
-                .onTapGesture {
-                    self.isShowingCart.toggle()
-                }
-                .sheet(isPresented: $isShowingCart){
-                    LocationDetailsView()
-                }
-            }// End of Button
             if(orderMethod == .Delivery){
                 DeliveryView(orderMethod: self.orderMethod, deleveryBtnIsDisabled: self.deleveryBtnIsDisabled, pickupBtnIsDisabled: self.pickupBtnIsDisabled).environmentObject(self.locationHelper)
             }else{

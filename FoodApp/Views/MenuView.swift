@@ -21,11 +21,14 @@ struct MenuView: View {
     ]
     @State private var isShowingItemDetails = false
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var locationHelper : LocationHelper
     var isShowingView : Binding<Bool>
-    var item : Restaurant
+    var resturant : Restaurant
+    var orderHelper : OrderHelper = OrderHelper()
+    @State var selectedItem : MenuItem?
+    var isDelivery : Bool
     var body: some View {
         NavigationView{
-            var selectedItem : MenuItem = menu[0]
             VStack{
                 ZStack(alignment:.leading){
                     Image(systemName: "person.fill").font(.title).frame(width: UIScreen.main.bounds.width,height: 80).padding(.top,10)
@@ -34,8 +37,8 @@ struct MenuView: View {
                         dismiss()
                     }.padding(.leading)
                 }
-                Text(self.item.name).font(.title).fontWeight(.bold)
-                Text("\(String(format:"%.f",((item.approxDeliveryTime)))) - \((String(format:"%.f",item.approxDeliveryTime + 5))) mins \(String(format:"%.2f",item.deliveryFee)) Delivery Fee").font(.caption).fontWeight(.medium)
+                Text(self.resturant.name).font(.title).fontWeight(.bold)
+                Text("\(String(format:"%.f",((resturant.approxDeliveryTime)))) - \((String(format:"%.f",resturant.approxDeliveryTime + 5))) mins \(String(format:"%.2f",resturant.deliveryFee)) Delivery Fee").font(.caption).fontWeight(.medium)
                 List{
                     ForEach(self.menu){menuItem in
                         HStack{
@@ -43,23 +46,46 @@ struct MenuView: View {
                             VStack(alignment:.leading){
                                 Text(menuItem.name).font(.title3).fontWeight(.bold)
                                 Text("$\(String(format: "%.2f", menuItem.price))").font(.caption).fontWeight(.bold)
-                            }.onTapGesture {
-                                self.isShowingItemDetails = true
-                                selectedItem = menuItem
                             }
+                        }.onTapGesture {
+                            self.isShowingItemDetails = true
+                            selectedItem = menuItem
                         }
                     }
                 }.listStyle(.plain)
                 Spacer()
-                Rectangle().foregroundColor(.black).overlay(
-                    Button(action:{}){
-                        Text("View Cart (1)").foregroundColor(.white).font(.title3)
-                    }.frame(maxWidth:.infinity)
-                )
-                .padding([.leading,.trailing])
-                .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 60)
+                if(!self.orderHelper.orderList.isEmpty){
+                    if(self.isDelivery){
+                        NavigationLink(destination: DeliveryOrderView(currentUserPosition: self.$locationHelper.currentLocation, resturantPosition: resturant.location!, resturant: self.resturant, orders: self.orderHelper.orderList)){
+                            Rectangle().foregroundColor(.black).overlay(
+                                Button(action:{
+                                    
+                                }){
+                                    Text("Order \(self.orderHelper.orderList.count) Items").foregroundColor(.white).font(.title3)
+                                }.frame(maxWidth:.infinity)
+                            )
+                            .padding([.leading,.trailing])
+                            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 60)
+                        }
+                    }else{
+                        NavigationLink(destination: PickUpOrderView(currentUserPosition: self.$locationHelper.currentLocation, resturantPosition: resturant.location!)){
+                            Rectangle().foregroundColor(.black).overlay(
+                                Button(action:{
+                                    
+                                }){
+                                    Text("Order \(self.orderHelper.orderList.count) Items").foregroundColor(.white).font(.title3)
+                                }.frame(maxWidth:.infinity)
+                            )
+                            .padding([.leading,.trailing])
+                            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 60)
+                        }
+                    }
+                    
+                }
             }.sheet(isPresented: $isShowingItemDetails){
-                MenuItemDetails(isShowingView: self.$isShowingItemDetails, item: selectedItem)
+                if(self.selectedItem != nil){
+                    MenuItemDetails(isShowingView: self.$isShowingItemDetails, item: selectedItem!).environmentObject(self.orderHelper)
+                }
             }
         }
     }

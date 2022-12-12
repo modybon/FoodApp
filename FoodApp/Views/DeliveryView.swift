@@ -31,10 +31,7 @@ struct DeliveryView: View {
                         }
                     }.listStyle(.grouped)
                     .refreshable {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 8.0) { // Change `2.0` to the desired number of seconds.
-                           // Code you want to be delayed
-                            print("Refreshed")
-                        }
+                        self.locationHelper.preformResturantsSearch()
                     }
                     if(!self.searchText.isEmpty){
                         if(self.locationHelper.resturantsList.contains(where: {$0.name.contains(searchText)})){
@@ -66,7 +63,7 @@ struct DeliveryView: View {
            
         }
         .sheet(isPresented: $isShowingResturantMenu){
-            MenuView(isShowingView: self.$isShowingResturantMenu, item: selectedResturant)
+            MenuView(isShowingView: self.$isShowingResturantMenu, resturant: selectedResturant,isDelivery: false)
         }
         .frame(maxWidth:.infinity,maxHeight: .infinity)
          // End of Vstack

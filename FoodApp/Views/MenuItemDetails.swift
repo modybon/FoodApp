@@ -12,6 +12,7 @@ struct MenuItemDetails: View {
     var item : MenuItem
     @State var qty : Int = 1
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var orderHelper : OrderHelper
     var body: some View {
         VStack(alignment:.leading){
             Image(systemName: "xmark").font(.title).padding([.bottom,.top]).onTapGesture {
@@ -27,6 +28,7 @@ struct MenuItemDetails: View {
             Spacer()
             Rectangle().foregroundColor(.black).overlay(
                 Button(action:{
+                    self.orderHelper.addOrder(order: Order(totalPrice: Float(self.qty) * item.price, qty: self.qty,item: item))
                     self.isShowingView.wrappedValue = false
                     dismiss()
                 }){

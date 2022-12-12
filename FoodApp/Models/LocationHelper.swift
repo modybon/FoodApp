@@ -96,6 +96,7 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
                     resturant.approxDeliveryTime = Float((route.expectedTravelTime / 60))
                     resturant.deliveryFee = (0 < resturant.distanceFromCL && resturant.distanceFromCL < 0.5) ? 2.99 : (resturant.distanceFromCL < 1) ? 3.99 : 4.99
                 }
+                resturant.location = item.placemark.location
                 if(resturant.deliveryFee <= self.filterHelper.maxDeliveryFee){
                     self.resturantsList.append(resturant)
                 }

@@ -8,8 +8,8 @@
 import SwiftUI
 import MapKit
 struct PickUpOrderView: View {
-    var currentUserPosition : Binding<CLLocationCoordinate2D>
-    var resturantPosition : CLLocationCoordinate2D
+    var currentUserPosition : Binding<CLLocation?>
+    var resturantPosition : CLLocation
     @State var isFullyExtended : Bool = false
     var body: some View {
         ZStack{
