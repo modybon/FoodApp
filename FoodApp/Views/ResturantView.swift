@@ -9,9 +9,12 @@ import SwiftUI
 
 struct ResturantView: View {
     // TODO: if its being used in pickup view it will also show distance from the user location
+    @EnvironmentObject var fireDBHelper: FireDBHelper
+    @EnvironmentObject var loginModel: AppViewModel
     @State var isFavourite : Bool = false
     var resturant : Resturant
     var isDelivery : Bool
+    
     var body: some View {
         let heartImage : String = (self.isFavourite) ?  "heart.fill" : "heart"
         VStack(alignment:.leading){
@@ -22,8 +25,17 @@ struct ResturantView: View {
                 Image(systemName: heartImage).font(.system(size: 40))
                     .foregroundColor((self.isFavourite) ? .red: nil)
                     .onTapGesture {
-                    print("Tapped")
-                    self.isFavourite.toggle()
+                        var addRestaurant: Bool
+                        if(isFavourite == true){
+                            addRestaurant = false
+                            self.fireDBHelper.updateUserRes(addRes: self.resturant, addorDel: addRestaurant)
+                            self.isFavourite.toggle()
+                        }else{
+                            addRestaurant = true
+                            self.fireDBHelper.updateUserRes(addRes: self.resturant, addorDel: addRestaurant)
+                            print("Tapped")
+                            self.isFavourite.toggle()
+                        }
                 }
             }
             HStack{

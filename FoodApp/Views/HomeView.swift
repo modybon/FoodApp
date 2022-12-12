@@ -9,6 +9,8 @@ import SwiftUI
 import MapKit
 struct HomeView: View {
     let orangeColor = Color(red: 0.968, green: 0.546, blue: 0.461)
+    @EnvironmentObject var fireDBHelper: FireDBHelper
+    @EnvironmentObject var loginModel: AppViewModel
     @EnvironmentObject var locationHelper : LocationHelper
     @State var searchResturant : String = ""
     @State var orderMethod : OrderMethod = .Delivery
@@ -65,7 +67,7 @@ struct HomeView: View {
             }
         }
         .onAppear{
-
+            self.fireDBHelper.getUserDetails(userID: self.loginModel.auth.currentUser?.uid)
             // End of Vstack
         }
     }
