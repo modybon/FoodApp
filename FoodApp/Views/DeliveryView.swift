@@ -14,7 +14,9 @@ struct DeliveryView: View {
     @State var pickupBtnIsDisabled : Bool
     @State var searchText : String = ""
     @EnvironmentObject var locationHelper : LocationHelper
+    @State private var isShowingResturantMenu = false
     //@EnvironmentObject var filterHelper : FilterHelper
+    @State var selectedResturant : Restaurant = Restaurant()
     var body: some View {
         VStack{
             SearchBar(searchText:$searchText,filterAvailble: true, title: "Food, Deliver,etc.",color: .gray.opacity(0.3)).environmentObject(self.locationHelper)
@@ -22,14 +24,14 @@ struct DeliveryView: View {
                 ZStack{
                     List{
                         ForEach(self.$locationHelper.resturantsList){ resturant in
-                            ResturantView(resturant: resturant.wrappedValue,isDelivery: true)
+                            RestaurantView(resturant: resturant.wrappedValue,isDelivery: true).onTapGesture {
+                                self.isShowingResturantMenu = true
+                                self.selectedResturant = resturant.wrappedValue
+                            }
                         }
                     }.listStyle(.grouped)
                     .refreshable {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 8.0) { // Change `2.0` to the desired number of seconds.
-                           // Code you want to be delayed
-                            print("Refreshed")
-                        }
+                        self.locationHelper.preformResturantsSearch()
                     }
                     if(!self.searchText.isEmpty){
                         if(self.locationHelper.resturantsList.contains(where: {$0.name.contains(searchText)})){
@@ -44,6 +46,9 @@ struct DeliveryView: View {
                                                 Text("\(String(format:"%.f",((resturant.approxDeliveryTime)))) - \((String(format:"%.f",resturant.approxDeliveryTime + 5))) mins")
                                             }
                                         }.frame(maxWidth:.infinity)
+                                    }.onTapGesture {
+                                        self.isShowingResturantMenu = true
+                                        selectedResturant = resturant
                                     }
                                 }
                             }.listStyle(.grouped)
@@ -56,12 +61,16 @@ struct DeliveryView: View {
             }
             Spacer()
            
-        }.frame(maxWidth:.infinity,maxHeight: .infinity)
+        }
+        .sheet(isPresented: $isShowingResturantMenu){
+            MenuView(isShowingView: self.$isShowingResturantMenu, resturant: selectedResturant,isDelivery: false)
+        }
+        .frame(maxWidth:.infinity,maxHeight: .infinity)
          // End of Vstack
     }
-    var searchResults: [Resturant] {
+    var searchResults: [Restaurant] {
             if searchText.isEmpty {
-                return [Resturant]()
+                return [Restaurant]()
             } else {
                 return self.locationHelper.resturantsList.filter { $0.name.contains(self.searchText)}
             }

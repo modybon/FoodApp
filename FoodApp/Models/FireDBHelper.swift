@@ -88,7 +88,7 @@ class FireDBHelper : ObservableObject{
     }
     
     
-    func updateUserRes(addRes: Resturant, addorDel: Bool){
+    func updateUserRes(addRes: Restaurant, addorDel: Bool){
         if(addorDel){
         do{
             try self.store.collection(COLLECTION_NAME).document(self.user.id!).collection("favRestaurants").document(addRes.name).setData(from: addRes, merge: true)

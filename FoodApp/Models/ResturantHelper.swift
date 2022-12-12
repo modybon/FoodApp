@@ -10,5 +10,5 @@ import MapKit
 class ResturantHelper : ObservableObject{
     @Published var currentResturantAnnotation : MKAnnotation?
     @Published var currentResturantMapItem : MKMapItem?
-    @Published var resturantsList : [Resturant] = [Resturant]()
+    @Published var resturantsList : [Restaurant] = [Restaurant]()
 }

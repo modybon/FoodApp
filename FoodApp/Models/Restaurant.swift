@@ -6,14 +6,15 @@
 //
 
 import Foundation
-
-class Resturant : Identifiable, Codable{
+import MapKit
+class Restaurant : Identifiable, Codable{
     var name : String = "NA"
     var phoneNumber : String = "NA"
     var distanceFromCL : Float = 0
     var deliveryFee : Float = 0
     var approxWalkTime : Float = 0
     var approxDeliveryTime : Float = 0
+    var location : CLLocation?
     
     enum CodingKeys: String, CodingKey{
         case name

@@ -8,38 +8,85 @@
 import SwiftUI
 
 struct MenuView: View {
-    let resturant : Resturant
-    @EnvironmentObject var orderHelper : OrderHelper
-    @State var foodA : Bool
-    @State var foodB : Bool
-    @State var foodC : Bool
-    @State var orderDetails : String
-    
+    var menu : [MenuItem] = [
+        MenuItem(name: "Burger", price: 9.99, image:"person.fill"),
+        MenuItem(name: "Fries", price: 3.99, image:"person.fill"),
+        MenuItem(name: "Cola", price: 1.99, image:"person.fill"),
+        MenuItem(name: "Cookie", price: 0.99, image:"person.fill"),
+        MenuItem(name: "Club Sandwich", price: 0.99, image:"person.fill"),
+        MenuItem(name: "Flafel Wrap", price: 0.99, image:"person.fill"),
+        MenuItem(name: "Shawarema", price: 0.99, image:"person.fill"),
+        MenuItem(name: "Fried Chicken Sandwich", price: 0.99, image:"person.fill"),
+        MenuItem(name: "Poutine", price: 0.99, image:"person.fill"),
+    ]
+    @State private var isShowingItemDetails = false
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var locationHelper : LocationHelper
+    var isShowingView : Binding<Bool>
+    var resturant : Restaurant
+    var orderHelper : OrderHelper = OrderHelper()
+    @State var selectedItem : MenuItem?
+    var isDelivery : Bool
     var body: some View {
-        
         NavigationView{
             VStack{
-                Toggle("Food A", isOn: $foodA)
-                Toggle("Food B", isOn: $foodB)
-                Toggle("Food C", isOn: $foodC)
-                TextField("orderDetails", text: $orderDetails)
-                    .padding()
-                Button("Order"){
-                    createOrder()
+                ZStack(alignment:.leading){
+                    Image(systemName: "person.fill").font(.title).frame(width: UIScreen.main.bounds.width,height: 80).padding(.top,10)
+                    Image(systemName: "xmark").font(.title).padding([.bottom,.top]).onTapGesture {
+                        self.isShowingView.wrappedValue = false
+                        dismiss()
+                    }.padding(.leading)
+                }
+                Text(self.resturant.name).font(.title).fontWeight(.bold)
+                Text("\(String(format:"%.f",((resturant.approxDeliveryTime)))) - \((String(format:"%.f",resturant.approxDeliveryTime + 5))) mins \(String(format:"%.2f",resturant.deliveryFee)) Delivery Fee").font(.caption).fontWeight(.medium)
+                List{
+                    ForEach(self.menu){menuItem in
+                        HStack{
+                            Image(systemName: menuItem.image).font(.system(size: 60))
+                            VStack(alignment:.leading){
+                                Text(menuItem.name).font(.title3).fontWeight(.bold)
+                                Text("$\(String(format: "%.2f", menuItem.price))").font(.caption).fontWeight(.bold)
+                            }
+                        }.onTapGesture {
+                            self.isShowingItemDetails = true
+                            selectedItem = menuItem
+                        }
+                    }
+                }.listStyle(.plain)
+                Spacer()
+                if(!self.orderHelper.orderList.isEmpty){
+                    if(self.isDelivery){
+                        NavigationLink(destination: DeliveryOrderView(currentUserPosition: self.$locationHelper.currentLocation, resturantPosition: resturant.location!, resturant: self.resturant, orders: self.orderHelper.orderList)){
+                            Rectangle().foregroundColor(.black).overlay(
+                                Button(action:{
+                                    
+                                }){
+                                    Text("Order \(self.orderHelper.orderList.count) Items").foregroundColor(.white).font(.title3)
+                                }.frame(maxWidth:.infinity)
+                            )
+                            .padding([.leading,.trailing])
+                            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 60)
+                        }
+                    }else{
+                        NavigationLink(destination: PickUpOrderView(currentUserPosition: self.$locationHelper.currentLocation, resturantPosition: resturant.location!)){
+                            Rectangle().foregroundColor(.black).overlay(
+                                Button(action:{
+                                    
+                                }){
+                                    Text("Order \(self.orderHelper.orderList.count) Items").foregroundColor(.white).font(.title3)
+                                }.frame(maxWidth:.infinity)
+                            )
+                            .padding([.leading,.trailing])
+                            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 60)
+                        }
+                    }
+                    
+                }
+            }.sheet(isPresented: $isShowingItemDetails){
+                if(self.selectedItem != nil){
+                    MenuItemDetails(isShowingView: self.$isShowingItemDetails, item: selectedItem!).environmentObject(self.orderHelper)
                 }
             }
-            .navigationTitle("Menu")
         }
-    }
-    
-    func createOrder() {
-        let choices : [Bool] = [self.foodA, self.foodB, self.foodC]
-        let cost1 = self.foodA ? 2.99 : 0.0
-        let cost2 = self.foodB ? 3.99 : 0.0
-        let cost3 = self.foodC ? 4.99 : 0.0
-        let finalCost = cost1+cost2+cost3
-        
-        let order = Order(res: resturant, amount: finalCost, choices: choices, orderDetails: self.orderDetails)
-        orderHelper.addOrder(order: order)
     }
 }

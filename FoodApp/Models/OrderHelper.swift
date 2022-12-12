@@ -9,7 +9,6 @@ import Foundation
 class OrderHelper : ObservableObject{
     @Published var orderList : [Order] = [Order]()
     
-    
     func addOrder (order: Order) {
         orderList.append(order)
     }
