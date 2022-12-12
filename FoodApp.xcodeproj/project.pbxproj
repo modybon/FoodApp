@@ -7,24 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D0402A528F50E0E00F2835F /* FoodAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0402A428F50E0E00F2835F /* FoodAppApp.swift */; };
-		2D0402A928F50E1100F2835F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0402A828F50E1100F2835F /* Assets.xcassets */; };
-		2D0402AC28F50E1100F2835F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0402AB28F50E1100F2835F /* Preview Assets.xcassets */; };
-		2D0402AE28F50E1100F2835F /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0402AD28F50E1100F2835F /* Persistence.swift */; };
-		2D0402B128F50E1100F2835F /* FoodApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D0402AF28F50E1100F2835F /* FoodApp.xcdatamodeld */; };
-		2D0402C828F518BA00F2835F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D0402C728F518BA00F2835F /* GoogleService-Info.plist */; };
 		8B39466CDD414D4685B1CBB3 /* Pods_FoodApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64BC214EB1E97BD21E07EE8 /* Pods_FoodApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		064594F233B522F00E067EA3 /* Pods-FoodApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodApp.debug.xcconfig"; path = "Target Support Files/Pods-FoodApp/Pods-FoodApp.debug.xcconfig"; sourceTree = "<group>"; };
 		2D0402A128F50E0E00F2835F /* FoodApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D0402A428F50E0E00F2835F /* FoodAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAppApp.swift; sourceTree = "<group>"; };
-		2D0402A828F50E1100F2835F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2D0402AB28F50E1100F2835F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		2D0402AD28F50E1100F2835F /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		2D0402B028F50E1100F2835F /* FoodApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FoodApp.xcdatamodel; sourceTree = "<group>"; };
-		2D0402C728F518BA00F2835F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5C082CA12922C06F0041931E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5C082CA32922C5BD0041931E /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		B8A334D7EB50598E77A99AC0 /* Pods-FoodApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodApp.release.xcconfig"; path = "Target Support Files/Pods-FoodApp/Pods-FoodApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -46,7 +34,6 @@
 		2D04029828F50E0E00F2835F = {
 			isa = PBXGroup;
 			children = (
-				2D0402A328F50E0E00F2835F /* FoodApp */,
 				2D0402A228F50E0E00F2835F /* Products */,
 				5DD17F744C93AC41F6D0C457 /* Pods */,
 				741E5FEAFFADCE4201DBC9CF /* Frameworks */,
@@ -60,27 +47,6 @@
 				2D0402A128F50E0E00F2835F /* FoodApp.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		2D0402A328F50E0E00F2835F /* FoodApp */ = {
-			isa = PBXGroup;
-			children = (
-				2D0402C728F518BA00F2835F /* GoogleService-Info.plist */,
-				2D0402A428F50E0E00F2835F /* FoodAppApp.swift */,
-				2D0402A828F50E1100F2835F /* Assets.xcassets */,
-				2D0402AD28F50E1100F2835F /* Persistence.swift */,
-				2D0402AF28F50E1100F2835F /* FoodApp.xcdatamodeld */,
-				2D0402AA28F50E1100F2835F /* Preview Content */,
-			);
-			path = FoodApp;
-			sourceTree = "<group>";
-		};
-		2D0402AA28F50E1100F2835F /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				2D0402AB28F50E1100F2835F /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		5C2E44462933D23A008306C7 /* Recovered References */ = {
@@ -169,9 +135,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D0402AC28F50E1100F2835F /* Preview Assets.xcassets in Resources */,
-				2D0402A928F50E1100F2835F /* Assets.xcassets in Resources */,
-				2D0402C828F518BA00F2835F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,9 +187,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D0402AE28F50E1100F2835F /* Persistence.swift in Sources */,
-				2D0402B128F50E1100F2835F /* FoodApp.xcdatamodeld in Sources */,
-				2D0402A528F50E0E00F2835F /* FoodAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,19 +391,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		2D0402AF28F50E1100F2835F /* FoodApp.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				2D0402B028F50E1100F2835F /* FoodApp.xcdatamodel */,
-			);
-			currentVersion = 2D0402B028F50E1100F2835F /* FoodApp.xcdatamodel */;
-			path = FoodApp.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 2D04029928F50E0E00F2835F /* Project object */;
 }
