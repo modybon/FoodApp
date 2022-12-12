@@ -1,5 +1,5 @@
 //
-//  Resturant.swift
+//  Restaurant.swift
 //  FoodApp
 //
 //  Created by Mohamed Fahmy on 2022-11-20.

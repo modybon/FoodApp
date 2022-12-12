@@ -23,7 +23,7 @@ struct MenuView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var locationHelper : LocationHelper
     var isShowingView : Binding<Bool>
-    var resturant : Restaurant
+    var restaurant : Restaurant
     var orderHelper : OrderHelper = OrderHelper()
     @State var selectedItem : MenuItem?
     var isDelivery : Bool
@@ -37,8 +37,8 @@ struct MenuView: View {
                         dismiss()
                     }.padding(.leading)
                 }
-                Text(self.resturant.name).font(.title).fontWeight(.bold)
-                Text("\(String(format:"%.f",((resturant.approxDeliveryTime)))) - \((String(format:"%.f",resturant.approxDeliveryTime + 5))) mins \(String(format:"%.2f",resturant.deliveryFee)) Delivery Fee").font(.caption).fontWeight(.medium)
+                Text(self.restaurant.name).font(.title).fontWeight(.bold)
+                Text("\(String(format:"%.f",((restaurant.approxDeliveryTime)))) - \((String(format:"%.f",restaurant.approxDeliveryTime + 5))) mins \(String(format:"%.2f",restaurant.deliveryFee)) Delivery Fee").font(.caption).fontWeight(.medium)
                 List{
                     ForEach(self.menu){menuItem in
                         HStack{
@@ -56,7 +56,7 @@ struct MenuView: View {
                 Spacer()
                 if(!self.orderHelper.orderList.isEmpty){
                     if(self.isDelivery){
-                        NavigationLink(destination: DeliveryOrderView(currentUserPosition: self.$locationHelper.currentLocation, resturantPosition: resturant.location!, resturant: self.resturant, orders: self.orderHelper.orderList)){
+                        NavigationLink(destination: DeliveryOrderView(currentUserPosition: self.$locationHelper.currentLocation, restaurantPosition: restaurant.location!, restaurant: self.restaurant, orders: self.orderHelper.orderList)){
                             Rectangle().foregroundColor(.black).overlay(
                                 Button(action:{
                                     
@@ -68,7 +68,7 @@ struct MenuView: View {
                             .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 60)
                         }
                     }else{
-                        NavigationLink(destination: PickUpOrderView(currentUserPosition: self.$locationHelper.currentLocation, resturantPosition: resturant.location!)){
+                        NavigationLink(destination: PickUpOrderView(currentUserPosition: self.$locationHelper.currentLocation, restaurantPosition: restaurant.location!)){
                             Rectangle().foregroundColor(.black).overlay(
                                 Button(action:{
                                     

@@ -46,7 +46,7 @@ struct FilterView: View {
                 self.locationHelper.filterHelper.maxDeliveryFee = self.value
                 print(#function,"Filter:\(self.locationHelper.filterHelper.dietOptions)")
                 print(#function,"Filter:\( self.locationHelper.filterHelper.maxDeliveryFee)")
-                self.locationHelper.preformResturantsSearch()
+                self.locationHelper.preformRestaurantsSearch()
                 dismiss()
             }
             Text("Max.Delivery Fee").font(.title).padding(.bottom,5)

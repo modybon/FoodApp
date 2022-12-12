@@ -9,10 +9,10 @@ import SwiftUI
 import MapKit
 struct DeliveringMapView: View {
     var currentUserPosition : Binding<CLLocation?>
-    var resturantPosition : CLLocation
+    var restaurantPosition : CLLocation
     @State var stepsCoordinates : [CLLocationCoordinate2D] = [CLLocationCoordinate2D]()
     var body: some View {
-        MapView(stepsCoordinates: $stepsCoordinates, startPosition: currentUserPosition, endPosition: resturantPosition)
+        MapView(stepsCoordinates: $stepsCoordinates, startPosition: currentUserPosition, endPosition: restaurantPosition)
     }
 }
 
@@ -221,12 +221,12 @@ class CustomAnnotation : NSObject,MKMapViewDelegate{
 //        car.title = "Sydney"
 //        car.snippet = "Australia"
 //        car.map = mapView
-//        let resturant = GMSMarker()
-//        resturant.position = CLLocationCoordinate2D(latitude: 43.467160, longitude: -79.714989)
-//        resturant.icon = UIImage(systemName: "car.fill")
-//        resturant.title = "Macdonalds"
-//        resturant.map = mapView
-//        fetchRoute(from: car.position, to: resturant.position)
+//        let restaurant = GMSMarker()
+//        restaurant.position = CLLocationCoordinate2D(latitude: 43.467160, longitude: -79.714989)
+//        restaurant.icon = UIImage(systemName: "car.fill")
+//        restaurant.title = "Macdonalds"
+//        restaurant.map = mapView
+//        fetchRoute(from: car.position, to: restaurant.position)
 //        return mapView
 //    }
 //

@@ -16,7 +16,7 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
     @Published var currentLocation: CLLocation? // Current Place
     @Published var region : MKCoordinateRegion = MKCoordinateRegion()
     private let locationManager : CLLocationManager
-    @Published var resturantsList : [Restaurant] = [Restaurant]()
+    @Published var restaurantsList : [Restaurant] = [Restaurant]()
     var filterHelper : FilterHelper
     //The location manager’s delegate informs the app when new locations arrive and when the privacy setting changes.
     
@@ -49,8 +49,8 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
         }
     }
     
-    func preformResturantsSearch(){
-        self.resturantsList.removeAll()
+    func preformRestaurantsSearch(){
+        self.restaurantsList.removeAll()
         let searchRequest = MKLocalSearch.Request()
         print(#function,"\(self.region)")
         searchRequest.region = self.region
@@ -62,9 +62,9 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
                 return
             }
             for item in response.mapItems{
-                let resturant = Restaurant()
-                resturant.name = item.name!
-                resturant.phoneNumber = item.phoneNumber ?? "NA"
+                let restaurant = Restaurant()
+                restaurant.name = item.name!
+                restaurant.phoneNumber = item.phoneNumber ?? "NA"
                 
                 let p1 = MKPlacemark(coordinate: currentLocation!.coordinate)
                 let p2 = MKPlacemark(coordinate: item.placemark.coordinate)
@@ -78,9 +78,9 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
 
                 direction.calculate(){ response , error in
                     guard let route = response?.routes.first else{return}
-                    resturant.distanceFromCL = Float(route.distance) / 1000
-                    print(#function, "Name: \(resturant.name) Distance: \(resturant.distanceFromCL), Time: \(route.expectedTravelTime / 60)")
-                    resturant.approxWalkTime = Float((route.expectedTravelTime / 60))
+                    restaurant.distanceFromCL = Float(route.distance) / 1000
+                    print(#function, "Name: \(restaurant.name) Distance: \(restaurant.distanceFromCL), Time: \(route.expectedTravelTime / 60)")
+                    restaurant.approxWalkTime = Float((route.expectedTravelTime / 60))
                 }
                 
                 let request2 = MKDirections.Request()
@@ -93,12 +93,12 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
                 direction2.calculate(){ response , error in
                     guard let route = response?.routes.first else{return}
                     print(#function, "Delivery Time: \(route.expectedTravelTime / 60)")
-                    resturant.approxDeliveryTime = Float((route.expectedTravelTime / 60))
-                    resturant.deliveryFee = (0 < resturant.distanceFromCL && resturant.distanceFromCL < 0.5) ? 2.99 : (resturant.distanceFromCL < 1) ? 3.99 : 4.99
+                    restaurant.approxDeliveryTime = Float((route.expectedTravelTime / 60))
+                    restaurant.deliveryFee = (0 < restaurant.distanceFromCL && restaurant.distanceFromCL < 0.5) ? 2.99 : (restaurant.distanceFromCL < 1) ? 3.99 : 4.99
                 }
-                resturant.location = item.placemark.location
-                if(resturant.deliveryFee <= self.filterHelper.maxDeliveryFee){
-                    self.resturantsList.append(resturant)
+                restaurant.location = item.placemark.location
+                if(restaurant.deliveryFee <= self.filterHelper.maxDeliveryFee){
+                    self.restaurantsList.append(restaurant)
                 }
             }
         }
@@ -118,7 +118,7 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
                     latitudeDelta: 0.01,
                     longitudeDelta: 0.01) // Controls the zoom of map
             )
-            preformResturantsSearch()
+            preformRestaurantsSearch()
         }else{
             // you will get location.first: Last know location by phone
             self.lastSeenLocation = locations.first
@@ -130,7 +130,7 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
                     latitudeDelta: 0.01,
                     longitudeDelta: 0.01) // Controls the zoom of map
             )
-            preformResturantsSearch()
+            preformRestaurantsSearch()
         }
         
         

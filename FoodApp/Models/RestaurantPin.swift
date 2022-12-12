@@ -1,5 +1,5 @@
 //
-//  ResturantPin.swift
+//  RestaurantPin.swift
 //  FoodApp
 //
 //  Created by Mohamed Fahmy on 2022-11-04.
@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 import MapKit
-class ResturantPin : NSObject,Identifiable, MKAnnotation{
+class RestaurantPin : NSObject,Identifiable, MKAnnotation{
     var coordinate: CLLocationCoordinate2D
     let id = UUID()
     var rating : Float

@@ -21,14 +21,14 @@ struct PickUpView: View {
     @EnvironmentObject var locationHelper : LocationHelper
     @State var currentLatitude : Double = 0
     @State var currentLongitude : Double = 0
-    @EnvironmentObject var resturantHelper : ResturantHelper
+    @EnvironmentObject var restaurantHelper : RestaurantHelper
     var body: some View {
         VStack{
             ZStack(alignment: .bottom){
                 Text("\(self.currentLongitude)")
                 Text("\(self.currentLatitude)")
                 ZStack(alignment:.topLeading){
-                    CustomMapView().environmentObject(self.resturantHelper)
+                    CustomMapView().environmentObject(self.restaurantHelper)
                     ZStack{
                         Rectangle()
                             .foregroundColor((slideOverIsExpanded) ? .white : .clear)
@@ -86,10 +86,10 @@ struct PickUpView: View {
                                 
                             }.padding()
                         }.frame(maxWidth: UIScreen.main.bounds.width,maxHeight: 80)
-                        if(!self.$locationHelper.resturantsList.isEmpty){
+                        if(!self.$locationHelper.restaurantsList.isEmpty){
                             List{
-                                ForEach(self.$locationHelper.resturantsList){ resturant in
-                                    RestaurantView(resturant: resturant.wrappedValue,isDelivery: false)
+                                ForEach(self.$locationHelper.restaurantsList){ restaurant in
+                                    RestaurantView(restaurant: restaurant.wrappedValue,isDelivery: false)
                                 }
                             }.listStyle(.grouped)
                         }else{
@@ -105,7 +105,7 @@ struct PickUpView: View {
         if searchText.isEmpty {
             return [Restaurant]()
         } else {
-            return self.locationHelper.resturantsList.filter { $0.name.contains(self.searchText)}
+            return self.locationHelper.restaurantsList.filter { $0.name.contains(self.searchText)}
         }
     }
 }
@@ -118,7 +118,7 @@ struct PickUpView_Previews: PreviewProvider {
 
 
 
-//                    Map(coordinateRegion: self.$locationViewModel.region, interactionModes: [.all], showsUserLocation: true, userTrackingMode: .constant(.follow), annotationItems: resturants){ place in
+//                    Map(coordinateRegion: self.$locationViewModel.region, interactionModes: [.all], showsUserLocation: true, userTrackingMode: .constant(.follow), annotationItems: restaurants){ place in
 //                        MapAnnotation(coordinate:place.coordinate){
 //                            Circle()
 //                                .foregroundColor(.white)
@@ -126,7 +126,7 @@ struct PickUpView_Previews: PreviewProvider {
 //                                .overlay(
 //                                    Text("\(String(format: "%.1f", place.rating))").font(.caption)
 //                                ).onTapGesture {
-//                                    print("Resturant Tapped ")
+//                                    print("Restaurant Tapped ")
 //                                }
 //                        }
 //                    }

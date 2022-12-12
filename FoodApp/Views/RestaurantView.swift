@@ -1,5 +1,5 @@
 //
-//  ResturantView.swift
+//  RestaurantView.swift
 //  FoodApp
 //
 //  Created by Mohamed Fahmy on 2022-10-13.
@@ -12,7 +12,7 @@ struct RestaurantView: View {
     @EnvironmentObject var fireDBHelper: FireDBHelper
     @EnvironmentObject var loginModel: AppViewModel
     @State var isFavourite : Bool = false
-    var resturant : Restaurant
+    var restaurant : Restaurant
     var isDelivery : Bool
     
     var body: some View {
@@ -28,11 +28,11 @@ struct RestaurantView: View {
                         var addRestaurant: Bool
                         if(isFavourite == true){
                             addRestaurant = false
-                            self.fireDBHelper.updateUserRes(addRes: self.resturant, addorDel: addRestaurant)
+                            self.fireDBHelper.updateUserRes(addRes: self.restaurant, addorDel: addRestaurant)
                             self.isFavourite.toggle()
                         }else{
                             addRestaurant = true
-                            self.fireDBHelper.updateUserRes(addRes: self.resturant, addorDel: addRestaurant)
+                            self.fireDBHelper.updateUserRes(addRes: self.restaurant, addorDel: addRestaurant)
                             print("Tapped")
                             self.isFavourite.toggle()
                         }
@@ -40,14 +40,14 @@ struct RestaurantView: View {
             }
             HStack{
                 VStack(alignment:.leading){
-                    Text("\(self.resturant.name)")
+                    Text("\(self.restaurant.name)")
                     HStack{
                         if(isDelivery){
-                            Text("$\(String(format:"%.2f",resturant.deliveryFee)) Delivery Fee")
-                            Text("\(String(format:"%.f",((resturant.approxDeliveryTime)))) - \((String(format:"%.f",resturant.approxDeliveryTime + 5))) mins")
+                            Text("$\(String(format:"%.2f",restaurant.deliveryFee)) Delivery Fee")
+                            Text("\(String(format:"%.f",((restaurant.approxDeliveryTime)))) - \((String(format:"%.f",restaurant.approxDeliveryTime + 5))) mins")
                         }else{
                             Text("10-15 mins")
-                            Text("\(String(format:"%.1f",resturant.distanceFromCL)) Km")
+                            Text("\(String(format:"%.1f",restaurant.distanceFromCL)) Km")
                         }
                     }
                 }
@@ -67,9 +67,9 @@ struct RestaurantView: View {
     }
 }
 
-//struct ResturantView_Previews: PreviewProvider {
-//    @State var resturant : Resturant = Resturant()
+//struct RestaurantView_Previews: PreviewProvider {
+//    @State var restaurant : Restaurant = Restaurant()
 //    static var previews: some View {
-//        ResturantView(resturant: resturant)
+//        RestaurantView(restaurant: restaurant)
 //    }
 //}

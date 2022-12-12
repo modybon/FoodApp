@@ -12,13 +12,13 @@ struct HomeView: View {
     @EnvironmentObject var fireDBHelper: FireDBHelper
     @EnvironmentObject var loginModel: AppViewModel
     @EnvironmentObject var locationHelper : LocationHelper
-    @State var searchResturant : String = ""
+    @State var searchRestaurant : String = ""
     @State var orderMethod : OrderMethod = .Delivery
     @State var deleveryBtnIsDisabled : Bool = true
     @State var pickupBtnIsDisabled : Bool = false
     @State var selected : Int?
     @State private var isShowingCart = false
-    @State var resturantHelper : ResturantHelper = ResturantHelper()
+    @State var restaurantHelper : RestaurantHelper = RestaurantHelper()
     var body: some View {
         VStack{
             HStack{
@@ -49,7 +49,7 @@ struct HomeView: View {
             if(orderMethod == .Delivery){
                 DeliveryView(orderMethod: self.orderMethod, deleveryBtnIsDisabled: self.deleveryBtnIsDisabled, pickupBtnIsDisabled: self.pickupBtnIsDisabled).environmentObject(self.locationHelper)
             }else{
-                PickUpView().environmentObject(self.resturantHelper)
+                PickUpView().environmentObject(self.restaurantHelper)
             }
         }
         .onAppear{

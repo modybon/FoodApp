@@ -8,47 +8,47 @@
 import SwiftUI
 
 struct DeliveryView: View {
-    @State var searchResturant : String = ""
+    @State var searchRestaurant : String = ""
     @State var orderMethod : OrderMethod
     @State var deleveryBtnIsDisabled : Bool
     @State var pickupBtnIsDisabled : Bool
     @State var searchText : String = ""
     @EnvironmentObject var locationHelper : LocationHelper
-    @State private var isShowingResturantMenu = false
+    @State private var isShowingRestaurantMenu = false
     //@EnvironmentObject var filterHelper : FilterHelper
-    @State var selectedResturant : Restaurant = Restaurant()
+    @State var selectedRestaurant : Restaurant = Restaurant()
     var body: some View {
         VStack{
             SearchBar(searchText:$searchText,filterAvailble: true, title: "Food, Deliver,etc.",color: .gray.opacity(0.3)).environmentObject(self.locationHelper)
-            if(!self.$locationHelper.resturantsList.isEmpty){
+            if(!self.$locationHelper.restaurantsList.isEmpty){
                 ZStack{
                     List{
-                        ForEach(self.$locationHelper.resturantsList){ resturant in
-                            RestaurantView(resturant: resturant.wrappedValue,isDelivery: true).onTapGesture {
-                                self.isShowingResturantMenu = true
-                                self.selectedResturant = resturant.wrappedValue
+                        ForEach(self.$locationHelper.restaurantsList){ restaurant in
+                            RestaurantView(restaurant: restaurant.wrappedValue,isDelivery: true).onTapGesture {
+                                self.isShowingRestaurantMenu = true
+                                self.selectedRestaurant = restaurant.wrappedValue
                             }
                         }
                     }.listStyle(.grouped)
                     .refreshable {
-                        self.locationHelper.preformResturantsSearch()
+                        self.locationHelper.preformRestaurantsSearch()
                     }
                     if(!self.searchText.isEmpty){
-                        if(self.locationHelper.resturantsList.contains(where: {$0.name.contains(searchText)})){
+                        if(self.locationHelper.restaurantsList.contains(where: {$0.name.contains(searchText)})){
                             List{
-                                ForEach(self.searchResults){ resturant in
+                                ForEach(self.searchResults){ restaurant in
                                     HStack{
                                         Image(systemName: "person.fill")
                                         VStack(alignment:.leading){
-                                            Text("\(resturant.name)")
+                                            Text("\(restaurant.name)")
                                             HStack{
-                                                Text("$\(String(format:"%.2f",resturant.deliveryFee)) Delivery Fee")
-                                                Text("\(String(format:"%.f",((resturant.approxDeliveryTime)))) - \((String(format:"%.f",resturant.approxDeliveryTime + 5))) mins")
+                                                Text("$\(String(format:"%.2f",restaurant.deliveryFee)) Delivery Fee")
+                                                Text("\(String(format:"%.f",((restaurant.approxDeliveryTime)))) - \((String(format:"%.f",restaurant.approxDeliveryTime + 5))) mins")
                                             }
                                         }.frame(maxWidth:.infinity)
                                     }.onTapGesture {
-                                        self.isShowingResturantMenu = true
-                                        selectedResturant = resturant
+                                        self.isShowingRestaurantMenu = true
+                                        selectedRestaurant = restaurant
                                     }
                                 }
                             }.listStyle(.grouped)
@@ -62,8 +62,8 @@ struct DeliveryView: View {
             Spacer()
            
         }
-        .sheet(isPresented: $isShowingResturantMenu){
-            MenuView(isShowingView: self.$isShowingResturantMenu, resturant: selectedResturant,isDelivery: false)
+        .sheet(isPresented: $isShowingRestaurantMenu){
+            MenuView(isShowingView: self.$isShowingRestaurantMenu, restaurant: selectedRestaurant,isDelivery: false)
         }
         .frame(maxWidth:.infinity,maxHeight: .infinity)
          // End of Vstack
@@ -72,7 +72,7 @@ struct DeliveryView: View {
             if searchText.isEmpty {
                 return [Restaurant]()
             } else {
-                return self.locationHelper.resturantsList.filter { $0.name.contains(self.searchText)}
+                return self.locationHelper.restaurantsList.filter { $0.name.contains(self.searchText)}
             }
         }
 }

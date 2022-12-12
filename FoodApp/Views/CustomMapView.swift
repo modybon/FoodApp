@@ -10,12 +10,12 @@ import MapKit
 
 struct CustomMapView: View {
     @EnvironmentObject var locationHelper : LocationHelper
-    @EnvironmentObject var resturantHelper : ResturantHelper
+    @EnvironmentObject var restaurantHelper : RestaurantHelper
     var body: some View {
         if(self.locationHelper.currentLocation != nil){
             MyMapView()
                 .environmentObject(locationHelper)
-                .environmentObject(resturantHelper)
+                .environmentObject(restaurantHelper)
         }else{
             Text("No Location")
         }
@@ -31,7 +31,7 @@ struct CustomMapView: View {
 struct MyMapView : UIViewRepresentable{
     typealias UIViewType = MKMapView
     @EnvironmentObject var locationHelper : LocationHelper
-    @EnvironmentObject var resturantHelper : ResturantHelper
+    @EnvironmentObject var restaurantHelper : RestaurantHelper
     func updateUIView(_ uiView: UIViewType, context: Context) {
         let sourceCodinates : CLLocationCoordinate2D
         let region : MKCoordinateRegion
@@ -74,9 +74,9 @@ struct MyMapView : UIViewRepresentable{
     
     func makeCoordinator() -> MapViewCoordinator {
         if(self.locationHelper.currentLocation != nil){
-            return MapViewCoordinator(currentLocation: self.$locationHelper.currentLocation,currentResturantAnnotation: self.$resturantHelper.currentResturantAnnotation , currentResturantMapItem: $resturantHelper.currentResturantMapItem)
+            return MapViewCoordinator(currentLocation: self.$locationHelper.currentLocation,currentRestaurantAnnotation: self.$restaurantHelper.currentRestaurantAnnotation , currentRestaurantMapItem: $restaurantHelper.currentRestaurantMapItem)
         }else{
-            return MapViewCoordinator(currentLocation: self.$locationHelper.lastSeenLocation, currentResturantAnnotation: self.$resturantHelper.currentResturantAnnotation, currentResturantMapItem: $resturantHelper.currentResturantMapItem)
+            return MapViewCoordinator(currentLocation: self.$locationHelper.lastSeenLocation, currentRestaurantAnnotation: self.$restaurantHelper.currentRestaurantAnnotation, currentRestaurantMapItem: $restaurantHelper.currentRestaurantMapItem)
         }
         
     }
@@ -133,12 +133,12 @@ struct MyMapView : UIViewRepresentable{
 class MapViewCoordinator : NSObject, MKMapViewDelegate{
     var currentLocation : Binding<CLLocation?>
     var currentOverlay : MKOverlay?
-    var currentResturantAnnotation : Binding<MKAnnotation?>
-    var currentResturantMapItem : Binding<MKMapItem?>
-    init(currentLocation: Binding<CLLocation?>, currentResturantAnnotation: Binding<MKAnnotation?>, currentResturantMapItem : Binding<MKMapItem?>) {
+    var currentRestaurantAnnotation : Binding<MKAnnotation?>
+    var currentRestaurantMapItem : Binding<MKMapItem?>
+    init(currentLocation: Binding<CLLocation?>, currentRestaurantAnnotation: Binding<MKAnnotation?>, currentRestaurantMapItem : Binding<MKMapItem?>) {
         self.currentLocation = currentLocation
-        self.currentResturantAnnotation = currentResturantAnnotation
-        self.currentResturantMapItem = currentResturantMapItem
+        self.currentRestaurantAnnotation = currentRestaurantAnnotation
+        self.currentRestaurantMapItem = currentRestaurantMapItem
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -149,7 +149,7 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate{
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("Tapped Resturant")
+        print("Tapped Restaurant")
         if(currentOverlay != nil){
             mapView.removeOverlay(currentOverlay!)
         }
@@ -166,13 +166,13 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate{
         request.destination = MKMapItem(placemark: p2)
         request.transportType = .walking
         
-        self.currentResturantAnnotation.wrappedValue = view.annotation!
+        self.currentRestaurantAnnotation.wrappedValue = view.annotation!
         
-        //print(#function,"Current Resturant: \(self.currentResturant.wrappedValue?.title! ?? "NA")")
+        //print(#function,"Current Restaurant: \(self.currentRestaurant.wrappedValue?.title! ?? "NA")")
         
         let searchRequest = MKLocalSearch.Request()
         searchRequest.region = mapView.region
-        searchRequest.naturalLanguageQuery = self.currentResturantAnnotation.wrappedValue?.title!
+        searchRequest.naturalLanguageQuery = self.currentRestaurantAnnotation.wrappedValue?.title!
         let search = MKLocalSearch(request: searchRequest)
         search.start(){ response, error in
             guard let response = response else{
@@ -180,8 +180,8 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate{
                 return
             }
             for item in response.mapItems{
-                self.currentResturantMapItem.wrappedValue = item
-                print("Resturant Selected: \(item.name): \nUrl:\(item.url)\nPhone Number: \(item.phoneNumber)")
+                self.currentRestaurantMapItem.wrappedValue = item
+                print("Restaurant Selected: \(item.name): \nUrl:\(item.url)\nPhone Number: \(item.phoneNumber)")
             }
         }
         

@@ -9,9 +9,9 @@ import SwiftUI
 import MapKit
 struct PickUpOrderMap: View {
     var currentUserPosition : Binding<CLLocation?>
-    var resturantPosition : CLLocation
+    var restaurantPosition : CLLocation
     var body: some View {
-        PickUpOrderMapView(currentUserPosition: currentUserPosition, resturantPosition: resturantPosition)
+        PickUpOrderMapView(currentUserPosition: currentUserPosition, restaurantPosition: restaurantPosition)
     }
 }
 
@@ -25,14 +25,14 @@ struct PickUpOrderMap: View {
 struct PickUpOrderMapView : UIViewRepresentable{
     typealias UIViewType = MKMapView
     var currentUserPosition : Binding<CLLocation?>
-    var resturantPosition : CLLocation
+    var restaurantPosition : CLLocation
     private var mapAnnotation = MKPointAnnotation()
     private var destination = MKPointAnnotation()
     var map : MKMapView = MKMapView()
     
-    init(currentUserPosition: Binding<CLLocation?>, resturantPosition: CLLocation){
+    init(currentUserPosition: Binding<CLLocation?>, restaurantPosition: CLLocation){
         self.currentUserPosition = currentUserPosition
-        self.resturantPosition = resturantPosition
+        self.restaurantPosition = restaurantPosition
     }
 
     func makeUIView(context: Context) -> MKMapView {
@@ -48,14 +48,14 @@ struct PickUpOrderMapView : UIViewRepresentable{
         map.showsCompass = true
         
         mapAnnotation.coordinate = CLLocationCoordinate2D(latitude: currentUserPosition.wrappedValue!.coordinate.latitude, longitude: currentUserPosition.wrappedValue!.coordinate.longitude)
-        destination.coordinate = CLLocationCoordinate2D(latitude: self.resturantPosition.coordinate.longitude, longitude: self.resturantPosition.coordinate.latitude)
+        destination.coordinate = CLLocationCoordinate2D(latitude: self.restaurantPosition.coordinate.longitude, longitude: self.restaurantPosition.coordinate.latitude)
         destination.title = "destination"
         //map.addAnnotation(mapAnnotation)
         map.userTrackingMode = .follow
         map.showsUserLocation = true
         map.addAnnotation(destination)
         let p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: currentUserPosition.wrappedValue!.coordinate.latitude, longitude: currentUserPosition.wrappedValue!.coordinate.longitude))
-        let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: self.resturantPosition.coordinate.longitude, longitude: self.resturantPosition.coordinate.latitude))
+        let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: self.restaurantPosition.coordinate.longitude, longitude: self.restaurantPosition.coordinate.latitude))
 
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: p1)

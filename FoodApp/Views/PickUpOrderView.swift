@@ -9,11 +9,11 @@ import SwiftUI
 import MapKit
 struct PickUpOrderView: View {
     var currentUserPosition : Binding<CLLocation?>
-    var resturantPosition : CLLocation
+    var restaurantPosition : CLLocation
     @State var isFullyExtended : Bool = false
     var body: some View {
         ZStack{
-            PickUpOrderMap(currentUserPosition: self.currentUserPosition, resturantPosition: resturantPosition)
+            PickUpOrderMap(currentUserPosition: self.currentUserPosition, restaurantPosition: restaurantPosition)
             SlideOverView(isFullyExtended: self.$isFullyExtended){
                 VStack(alignment:.leading,spacing: 30){
                     VStack(alignment:.leading){

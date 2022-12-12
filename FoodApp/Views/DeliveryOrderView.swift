@@ -10,13 +10,13 @@ import MapKit
 struct DeliveryOrderView: View {
     @State var isFullyExtended : Bool = false
     var currentUserPosition : Binding<CLLocation?>
-    var resturantPosition : CLLocation
-    var resturant : Restaurant
+    var restaurantPosition : CLLocation
+    var restaurant : Restaurant
     var orders : [Order]
     var body: some View {
         VStack(alignment:.leading){
             ZStack(alignment:.top){
-                DeliveringMapView(currentUserPosition: currentUserPosition, resturantPosition: resturantPosition)
+                DeliveringMapView(currentUserPosition: currentUserPosition, restaurantPosition: restaurantPosition)
                 SlideOverView(isFullyExtended: self.$isFullyExtended){
                     VStack(alignment:.leading,spacing: 30){
                         HStack(spacing: 30){
@@ -34,7 +34,7 @@ struct DeliveryOrderView: View {
                         }
                         VStack(alignment:.leading){
                             Text("Order Summary").font(.title3).fontWeight(.bold)
-                            Text(self.resturant.name).font(.caption).foregroundColor(.gray)
+                            Text(self.restaurant.name).font(.caption).foregroundColor(.gray)
                             ForEach(self.orders){ order in
                                 HStack{
                                     Rectangle()
