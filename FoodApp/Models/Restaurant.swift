@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Resturant : Identifiable, Codable{
+class Restaurant : Identifiable, Codable{
     var name : String = "NA"
     var phoneNumber : String = "NA"
     var distanceFromCL : Float = 0

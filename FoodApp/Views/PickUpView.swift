@@ -89,7 +89,7 @@ struct PickUpView: View {
                         if(!self.$locationHelper.resturantsList.isEmpty){
                             List{
                                 ForEach(self.$locationHelper.resturantsList){ resturant in
-                                    ResturantView(resturant: resturant.wrappedValue,isDelivery: false)
+                                    RestaurantView(resturant: resturant.wrappedValue,isDelivery: false)
                                 }
                             }.listStyle(.grouped)
                         }else{
@@ -101,9 +101,9 @@ struct PickUpView: View {
             //Spacer()
         }// End of Vstack
     }
-    var searchResults: [Resturant] {
+    var searchResults: [Restaurant] {
         if searchText.isEmpty {
-            return [Resturant]()
+            return [Restaurant]()
         } else {
             return self.locationHelper.resturantsList.filter { $0.name.contains(self.searchText)}
         }

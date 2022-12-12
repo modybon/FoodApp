@@ -16,7 +16,7 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
     @Published var currentLocation: CLLocation? // Current Place
     @Published var region : MKCoordinateRegion = MKCoordinateRegion()
     private let locationManager : CLLocationManager
-    @Published var resturantsList : [Resturant] = [Resturant]()
+    @Published var resturantsList : [Restaurant] = [Restaurant]()
     var filterHelper : FilterHelper
     //The location manager’s delegate informs the app when new locations arrive and when the privacy setting changes.
     
@@ -62,7 +62,7 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
                 return
             }
             for item in response.mapItems{
-                let resturant = Resturant()
+                let resturant = Restaurant()
                 resturant.name = item.name!
                 resturant.phoneNumber = item.phoneNumber ?? "NA"
                 

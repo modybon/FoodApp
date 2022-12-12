@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MenuView: View {
-    let resturant : Resturant
+    let resturant : Restaurant
     @EnvironmentObject var orderHelper : OrderHelper
     @State var foodA : Bool
     @State var foodB : Bool

@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct ResturantView: View {
+struct RestaurantView: View {
     // TODO: if its being used in pickup view it will also show distance from the user location
     @EnvironmentObject var fireDBHelper: FireDBHelper
     @EnvironmentObject var loginModel: AppViewModel
     @State var isFavourite : Bool = false
-    var resturant : Resturant
+    var resturant : Restaurant
     var isDelivery : Bool
     
     var body: some View {

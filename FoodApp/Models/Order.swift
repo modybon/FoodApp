@@ -7,12 +7,12 @@
 
 import Foundation
 class Order{
-    var restaurant: Resturant
+    var restaurant: Restaurant
     var amountPayed: Double
     var choices : [Bool]
     var orderDetails : String
     
-    init(res: Resturant, amount: Double, choices: [Bool], orderDetails: String){
+    init(res: Restaurant, amount: Double, choices: [Bool], orderDetails: String){
         self.restaurant = res
         self.amountPayed = amount
         self.choices = choices

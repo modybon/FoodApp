@@ -22,7 +22,7 @@ struct DeliveryView: View {
                 ZStack{
                     List{
                         ForEach(self.$locationHelper.resturantsList){ resturant in
-                            ResturantView(resturant: resturant.wrappedValue,isDelivery: true)
+                            RestaurantView(resturant: resturant.wrappedValue,isDelivery: true)
                         }
                     }.listStyle(.grouped)
                     .refreshable {
@@ -59,9 +59,9 @@ struct DeliveryView: View {
         }.frame(maxWidth:.infinity,maxHeight: .infinity)
          // End of Vstack
     }
-    var searchResults: [Resturant] {
+    var searchResults: [Restaurant] {
             if searchText.isEmpty {
-                return [Resturant]()
+                return [Restaurant]()
             } else {
                 return self.locationHelper.resturantsList.filter { $0.name.contains(self.searchText)}
             }
