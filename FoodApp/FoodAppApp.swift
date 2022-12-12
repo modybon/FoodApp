@@ -24,11 +24,12 @@ struct FoodAppApp: App {
             //.environment(\.managedObjectContext, persistenceController.container.viewContext)
             let loginModel = AppViewModel()
             let fireDBHelper = FireDBHelper(database: Firestore.firestore())
-            startView()
-                .environmentObject(loginModel)
-                .environmentObject(locationhelper)
-                .environmentObject(fireDBHelper)
-            //DeliveringOrderView()
+//            startView()
+//                .environmentObject(loginModel)
+//                .environmentObject(locationhelper)
+//                .environmentObject(fireDBHelper)
+            MenuView()
+            
         }
     }
 }

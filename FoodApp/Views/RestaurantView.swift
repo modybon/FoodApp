@@ -49,7 +49,6 @@ struct RestaurantView: View {
                             Text("10-15 mins")
                             Text("\(String(format:"%.1f",resturant.distanceFromCL)) Km")
                         }
-                        
                     }
                 }
                 Spacer()

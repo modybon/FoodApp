@@ -8,38 +8,50 @@
 import SwiftUI
 
 struct MenuView: View {
-    let resturant : Restaurant
-    @EnvironmentObject var orderHelper : OrderHelper
-    @State var foodA : Bool
-    @State var foodB : Bool
-    @State var foodC : Bool
-    @State var orderDetails : String
-    
+    var menu : [MenuItem] = [
+        MenuItem(name: "Burger", price: 9.99, image:"person.fill"),
+        MenuItem(name: "Fries", price: 3.99, image:"person.fill"),
+        MenuItem(name: "Cola", price: 1.99, image:"person.fill"),
+        MenuItem(name: "Cookie", price: 0.99, image:"person.fill"),
+        MenuItem(name: "Club Sandwich", price: 0.99, image:"person.fill"),
+        MenuItem(name: "Flafel Wrap", price: 0.99, image:"person.fill"),
+        MenuItem(name: "Shawarema", price: 0.99, image:"person.fill"),
+        MenuItem(name: "Fried Chicken Sandwich", price: 0.99, image:"person.fill"),
+        MenuItem(name: "Poutine", price: 0.99, image:"person.fill"),
+    ]
+    @State private var isShowingItemDetails = false
     var body: some View {
-        
         NavigationView{
+            var selectedItem : MenuItem = menu[0]
             VStack{
-                Toggle("Food A", isOn: $foodA)
-                Toggle("Food B", isOn: $foodB)
-                Toggle("Food C", isOn: $foodC)
-                TextField("orderDetails", text: $orderDetails)
-                    .padding()
-                Button("Order"){
-                    createOrder()
-                }
+                Image(systemName: "person.fill").font(.title).frame(width: UIScreen.main.bounds.width,height: 80).padding(.top,10)
+                Text("Resturant Name").font(.title).fontWeight(.bold)
+                Text("40-60 min $0.99 Delivery Fee").font(.caption).fontWeight(.medium)
+                List{
+                    ForEach(self.menu){menuItem in
+                        HStack{
+                            Image(systemName: menuItem.image).font(.system(size: 60))
+                            VStack(alignment:.leading){
+                                Text(menuItem.name).font(.title3).fontWeight(.bold)
+                                Text("$\(String(format: "%.2f", menuItem.price))").font(.caption).fontWeight(.bold)
+                            }.onTapGesture {
+                                self.isShowingItemDetails = true
+                                selectedItem = menuItem
+                            }
+                        }
+                    }
+                }.listStyle(.plain)
+                Spacer()
+                Rectangle().foregroundColor(.black).overlay(
+                    Button(action:{}){
+                        Text("View Cart (1)").foregroundColor(.white).font(.title3)
+                    }.frame(maxWidth:.infinity)
+                )
+                .padding([.leading,.trailing])
+                .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 60)
+            }.sheet(isPresented: $isShowingItemDetails){
+                MenuItemDetails(isShowingView: self.$isShowingItemDetails, item: selectedItem)
             }
-            .navigationTitle("Menu")
         }
-    }
-    
-    func createOrder() {
-        let choices : [Bool] = [self.foodA, self.foodB, self.foodC]
-        let cost1 = self.foodA ? 2.99 : 0.0
-        let cost2 = self.foodB ? 3.99 : 0.0
-        let cost3 = self.foodC ? 4.99 : 0.0
-        let finalCost = cost1+cost2+cost3
-        
-        let order = Order(res: resturant, amount: finalCost, choices: choices, orderDetails: self.orderDetails)
-        orderHelper.addOrder(order: order)
     }
 }
