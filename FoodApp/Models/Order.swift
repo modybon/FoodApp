@@ -6,14 +6,8 @@
 //
 
 import Foundation
-<<<<<<< Updated upstream
 class Order{
     var restaurant: Restaurant
-=======
-class Order: Identifiable{
-    
-    var restaurant: Resturant
->>>>>>> Stashed changes
     var amountPayed: Double
     var choices : [Bool]
     var orderDetails : String
