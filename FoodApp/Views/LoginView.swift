@@ -84,7 +84,6 @@ struct LoginView: View {
                     .padding()
                 
                 Button(action: {
-                    
                     guard !email.isEmpty, !password.isEmpty else {
                         return
                     }

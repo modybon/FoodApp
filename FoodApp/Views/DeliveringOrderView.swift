@@ -66,11 +66,8 @@ struct DeliveringOrderView: View {
                         Spacer()
                     }
                     }.frame(maxWidth: UIScreen.main.bounds.width)
-                
             }
-            
         }
-        
     }
 }
 

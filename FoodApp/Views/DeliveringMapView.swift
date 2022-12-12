@@ -94,6 +94,12 @@ struct MapView : UIViewRepresentable{
 //                moveCar(car: mapAnnotation, newStep: step)
 //            }
 //        }
+        for step in self.stepsCoordinates.wrappedValue{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0){
+                self.moveCar(car: mapAnnotation, newStep: step)
+            }
+        }
+
         let sourceCodinates : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 51.50998, longitude: -0.1337)
         let region : MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: sourceCodinates.latitude, longitude: sourceCodinates.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         uiView.setRegion(region, animated: true)
