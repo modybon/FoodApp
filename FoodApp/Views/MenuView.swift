@@ -20,13 +20,22 @@ struct MenuView: View {
         MenuItem(name: "Poutine", price: 0.99, image:"person.fill"),
     ]
     @State private var isShowingItemDetails = false
+    @Environment(\.dismiss) private var dismiss
+    var isShowingView : Binding<Bool>
+    var item : Restaurant
     var body: some View {
         NavigationView{
             var selectedItem : MenuItem = menu[0]
             VStack{
-                Image(systemName: "person.fill").font(.title).frame(width: UIScreen.main.bounds.width,height: 80).padding(.top,10)
-                Text("Resturant Name").font(.title).fontWeight(.bold)
-                Text("40-60 min $0.99 Delivery Fee").font(.caption).fontWeight(.medium)
+                ZStack(alignment:.leading){
+                    Image(systemName: "person.fill").font(.title).frame(width: UIScreen.main.bounds.width,height: 80).padding(.top,10)
+                    Image(systemName: "xmark").font(.title).padding([.bottom,.top]).onTapGesture {
+                        self.isShowingView.wrappedValue = false
+                        dismiss()
+                    }.padding(.leading)
+                }
+                Text(self.item.name).font(.title).fontWeight(.bold)
+                Text("\(String(format:"%.f",((item.approxDeliveryTime)))) - \((String(format:"%.f",item.approxDeliveryTime + 5))) mins \(String(format:"%.2f",item.deliveryFee)) Delivery Fee").font(.caption).fontWeight(.medium)
                 List{
                     ForEach(self.menu){menuItem in
                         HStack{
