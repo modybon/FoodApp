@@ -87,6 +87,8 @@ struct MenuView: View {
                     MenuItemDetails(isShowingView: self.$isShowingItemDetails, item: selectedItem!).environmentObject(self.orderHelper)
                 }
             }
+        }.onAppear(){
+            //self.locationHelper.currentLocation
         }
     }
 }

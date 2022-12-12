@@ -32,6 +32,7 @@ struct RestaurantView: View {
                             self.isFavourite.toggle()
                         }else{
                             addRestaurant = true
+                            self.restaurant.isFavorite = true
                             self.fireDBHelper.updateUserRes(addRes: self.restaurant, addorDel: addRestaurant)
                             print("Tapped")
                             self.isFavourite.toggle()

@@ -7,11 +7,13 @@
 
 import Foundation
 import FirebaseFirestore
+import CoreLocation
 
 class FireDBHelper : ObservableObject{
     
     private let store : Firestore
     @Published var user = User()
+    @Published var favRestaurantList : [Restaurant] = [Restaurant()]
     private let COLLECTION_NAME : String = "Users"
     
     
@@ -70,6 +72,31 @@ class FireDBHelper : ObservableObject{
 //                print("City: \(self.user)")
 //
 //                        }
+    }
+    
+    func getfavRestuarants(userID: String?){
+        print(#function, "user id got is ****: \(userID)")
+        self.store.collection("Users").document(String(userID!)).collection("favRestaurants")
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    self.favRestaurantList.removeAll()
+                    for document in querySnapshot!.documents {
+                        print("You are here: \(document.documentID) => \(document.data())")
+                        let data = document.data()
+                        let name = data["name"] as? String ?? "NA"
+                        let phoneNumber = data["phoneNumber"] as? String ?? "NA"
+                        let distanceFromCL = data["distanceFromCL"] as? Float ?? 0
+                        let deliveryFee = data["deliveryFee"] as? Float ?? 0
+                        let approxWalkTime = data["approxWalkTime"] as? Float ?? 0
+                        let approxDeliveryTime = data["approxDeliveryTime"] as? Float ?? 0
+                        let location = data["location"] as? CLLocation ?? CLLocation(latitude: 37, longitude: 40)
+                        
+                        self.favRestaurantList.append(Restaurant(name: name, phone: phoneNumber, distancefromCL: distanceFromCL, deliveryFee: deliveryFee, appxWalkTime: approxWalkTime, appxDelTime: approxDeliveryTime, loc: location))
+                     }
+                }
+        }
     }
     
     func updateUser(userToUpdate: User){

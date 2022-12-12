@@ -44,6 +44,7 @@
 		2DC636972909F84700D5756C /* LocationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC636962909F84600D5756C /* LocationDetailsView.swift */; };
 		2DE39B8828F5DE3600F60A4B /* CartOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE39B8728F5DE3600F60A4B /* CartOrderView.swift */; };
 		2DF0374428FD03790042D80A /* OrderMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF0374328FD03790042D80A /* OrderMethod.swift */; };
+		5C0BE383294779AF00D090CD /* FavRestaurantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0BE382294779AF00D090CD /* FavRestaurantView.swift */; };
 		5C2E44482933D2FA008306C7 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2E44472933D2FA008306C7 /* Order.swift */; };
 		5C2E444A2933D328008306C7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2E44492933D328008306C7 /* User.swift */; };
 		5C2E45DE293D325C008306C7 /* FireDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2E45DD293D325C008306C7 /* FireDBHelper.swift */; };
@@ -93,6 +94,7 @@
 		2DF0374328FD03790042D80A /* OrderMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderMethod.swift; sourceTree = "<group>"; };
 		5C082CA12922C06F0041931E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5C082CA32922C5BD0041931E /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		5C0BE382294779AF00D090CD /* FavRestaurantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavRestaurantView.swift; sourceTree = "<group>"; };
 		5C2E44472933D2FA008306C7 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		5C2E44492933D328008306C7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5C2E45DD293D325C008306C7 /* FireDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireDBHelper.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				5C2E45DF293E7404008306C7 /* OrderDetailsView.swift */,
 				1CE3A0C4294677D0006CAA1C /* MenuView.swift */,
 				2D102A532946CE9F00DDFFE7 /* MenuItemDetails.swift */,
+				5C0BE382294779AF00D090CD /* FavRestaurantView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				2D0402B128F50E1100F2835F /* FoodApp.xcdatamodeld in Sources */,
 				2D102A542946CE9F00DDFFE7 /* MenuItemDetails.swift in Sources */,
 				2D012B57293D5F5F00B7B84D /* RestaurantView.swift in Sources */,
+				5C0BE383294779AF00D090CD /* FavRestaurantView.swift in Sources */,
 				1C68D8ED2939C2C500866BBF /* LoginView.swift in Sources */,
 				2D012B51293D44F700B7B84D /* LocationHelper.swift in Sources */,
 				5C2E44482933D2FA008306C7 /* Order.swift in Sources */,

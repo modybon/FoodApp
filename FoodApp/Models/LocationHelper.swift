@@ -97,6 +97,7 @@ class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate{
                     restaurant.deliveryFee = (0 < restaurant.distanceFromCL && restaurant.distanceFromCL < 0.5) ? 2.99 : (restaurant.distanceFromCL < 1) ? 3.99 : 4.99
                 }
                 restaurant.location = item.placemark.location
+                restaurant.isFavorite = false
                 if(restaurant.deliveryFee <= self.filterHelper.maxDeliveryFee){
                     self.restaurantsList.append(restaurant)
                 }
